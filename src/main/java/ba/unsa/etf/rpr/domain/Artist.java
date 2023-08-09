@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Objects;
+
 /**
  * Bean class for artists
  */
@@ -63,5 +65,10 @@ public class Artist {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, label, country, type);
     }
 }

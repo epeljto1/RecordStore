@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Objects;
+
 /**
  * Bean class for labels
  */
@@ -38,5 +40,10 @@ public class Label {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, country);
     }
 }

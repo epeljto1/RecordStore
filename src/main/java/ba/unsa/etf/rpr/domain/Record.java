@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Bean class for records
@@ -70,5 +71,10 @@ public class Record {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, artist, release_date, genre, country);
     }
 }
