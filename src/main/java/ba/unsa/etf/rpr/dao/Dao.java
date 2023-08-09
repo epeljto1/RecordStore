@@ -6,4 +6,5 @@ package ba.unsa.etf.rpr.dao;
  */
 public interface Dao<T> {
     T getById(int id); // get entity from DB by ID
+    T add(T item); // saves entity into DB
 }
