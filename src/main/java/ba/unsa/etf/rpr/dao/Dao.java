@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import java.util.List;
+
 /**
  * Root interface for all DAO classes
  * @author epeljto1
@@ -9,4 +11,5 @@ public interface Dao<T> {
     T add(T item); // saves entity into DB
     T update(T item); // updates entity in DB
     void delete(int id); // deletes item from DB based on ID
+    List<T> getAll();
 }
