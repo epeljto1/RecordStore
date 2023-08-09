@@ -8,4 +8,5 @@ public interface Dao<T> {
     T getById(int id); // get entity from DB by ID
     T add(T item); // saves entity into DB
     T update(T item); // updates entity in DB
+    void delete(int id); // deletes item from DB based on ID
 }
