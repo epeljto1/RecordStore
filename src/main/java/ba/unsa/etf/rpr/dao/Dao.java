@@ -5,5 +5,5 @@ package ba.unsa.etf.rpr.dao;
  * @author epeljto1
  */
 public interface Dao<T> {
-    T getById(int id);
+    T getById(int id); // get entity from DB by ID
 }
