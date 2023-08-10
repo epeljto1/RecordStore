@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Label;
 
 import java.sql.*;
@@ -28,6 +27,29 @@ public class LabelDaoSQLImpl implements LabelDao {
 
     @Override
     public Label getById(int id) {
+        try
+        {
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM labels WHERE id = ?");
+            stmt.setInt(1 ,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Label label = new Label();
+                label.setId(rs.getInt("id"));
+                label.setName(rs.getString("name"));
+                label.setCountry(rs.getString("country"));
+                rs.close();
+                return label;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
@@ -72,11 +94,12 @@ public class LabelDaoSQLImpl implements LabelDao {
                 labels.add(label);
             }
             rs.close();
+            return labels;
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
-        return labels;
+        return null;
     }
 }
