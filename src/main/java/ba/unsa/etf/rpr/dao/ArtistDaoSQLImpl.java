@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Artist;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +13,10 @@ public class ArtistDaoSQLImpl implements ArtistDao {
 
     public ArtistDaoSQLImpl() {
         Properties prop = new Properties();
-        try
+        try(InputStream input = LabelDaoSQLImpl.class.getResourceAsStream("/application.properties"))
         {
-            this.conn = DriverManager.getConnection("jdbc:mysql://" +
-                            prop.getProperty("db.host") + "/" +
-                            prop.getProperty("db.scheme") + "/" +
-                            prop.getProperty("db.port"),
-                    prop.getProperty("db.username"), prop.getProperty("db.password"));
+            prop.load(input);
+            conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -72,11 +70,12 @@ public class ArtistDaoSQLImpl implements ArtistDao {
                 artists.add(artist);
             }
             rs.close();
+            return artists;
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
-        return artists;
+        return null;
     }
 }
