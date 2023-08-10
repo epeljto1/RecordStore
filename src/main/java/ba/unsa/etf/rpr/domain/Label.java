@@ -11,13 +11,6 @@ public class Label {
     private String name;
     private String country;
 
-    public Label(int id, String name, String country)
-    {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-    }
-
     public int getId() {
         return id;
     }

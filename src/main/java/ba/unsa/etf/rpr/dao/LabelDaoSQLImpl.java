@@ -3,8 +3,8 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Label;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -53,5 +53,30 @@ public class LabelDaoSQLImpl implements LabelDao {
     public List<Label> getAll()
     {
         return null;
+    }
+
+    @Override
+    public List<Label> searchByName(String name)
+    {
+        String query = "SELECT * FROM labels WHERE name = ?";
+        List<Label> labels = new ArrayList<>();
+        try
+        {
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Label label = new Label();
+                label.setId(rs.getInt("id"));
+                label.setName(rs.getString("name"));
+                label.setCountry(rs.getString("country"));
+                labels.add(label);
+            }
+            rs.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return labels;
     }
 }
