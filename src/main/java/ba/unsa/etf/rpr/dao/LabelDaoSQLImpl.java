@@ -1,10 +1,14 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Artist;
+import ba.unsa.etf.rpr.domain.Label;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 import java.util.Properties;
 
-public class LabelDaoSQLImpl {
+public class LabelDaoSQLImpl implements LabelDao {
     private Connection conn;
 
     public LabelDaoSQLImpl() {
@@ -20,5 +24,34 @@ public class LabelDaoSQLImpl {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Label getById(int id) {
+        return null;
+    }
+
+    @Override
+    public Label add(Label item)
+    {
+        return null;
+    }
+
+    @Override
+    public Label update(Label item)
+    {
+        return null;
+    }
+
+    @Override
+    public void delete(int id)
+    {
+
+    }
+
+    @Override
+    public List<Label> getAll()
+    {
+        return null;
     }
 }
