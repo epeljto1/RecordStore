@@ -1,7 +1,10 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Artist;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 import java.util.Properties;
 
 public class ArtistDaoSQLImpl implements ArtistDao {
@@ -20,5 +23,34 @@ public class ArtistDaoSQLImpl implements ArtistDao {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Artist getById(int id) {
+        return null;
+    }
+
+    @Override
+    public Artist add(Artist item)
+    {
+        return null;
+    }
+
+    @Override
+    public Artist update(Artist item)
+    {
+        return null;
+    }
+
+    @Override
+    public void delete(int id)
+    {
+
+    }
+
+    @Override
+    public List<Artist> getAll()
+    {
+        return null;
     }
 }
