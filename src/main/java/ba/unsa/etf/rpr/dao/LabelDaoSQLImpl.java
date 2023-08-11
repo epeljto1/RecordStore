@@ -73,8 +73,13 @@ public class LabelDaoSQLImpl implements LabelDao {
     public Label add(Label item)
     {
         int id = getMaxId();
+        String name = item.getName();
+        String country = item.getCountry();
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO labels VALUES (id, item.getName(), item.getCountry())");
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO labels (id, name, country) VALUES (?, ?, ?)");
+            stmt.setInt(1,id);
+            stmt.setString(2,name);
+            stmt.setString(3,country);
             stmt.executeUpdate();
             item.setId(id);
             return item;
