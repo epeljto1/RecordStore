@@ -144,13 +144,14 @@ public class LabelDaoSQLImpl implements LabelDao {
     }
 
     @Override
-    public List<Label> searchByName(String name)
+    public List<Label> searchByCountry(String name)
     {
-        String query = "SELECT * FROM labels WHERE name = ?";
+        String query = "SELECT * FROM labels WHERE country = ?";
         List<Label> labels = new ArrayList<>();
         try
         {
             PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Label label = new Label();
@@ -164,7 +165,8 @@ public class LabelDaoSQLImpl implements LabelDao {
         }
         catch(SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
         return null;
     }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public interface LabelDao extends Dao<Label> {
-    // Returns list of all labels with the same name
+    // Returns list of all labels with the same country
     // as search parameter
-    List<Label> searchByName(String name);
+    List<Label> searchByCountry(String country);
 }
