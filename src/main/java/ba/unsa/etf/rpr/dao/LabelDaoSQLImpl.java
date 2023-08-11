@@ -72,6 +72,16 @@ public class LabelDaoSQLImpl implements LabelDao {
     @Override
     public Label add(Label item)
     {
+        int id = getMaxId();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO labels VALUES (id, item.getName(), item.getCountry())");
+            stmt.executeUpdate();
+            item.setId(id);
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
