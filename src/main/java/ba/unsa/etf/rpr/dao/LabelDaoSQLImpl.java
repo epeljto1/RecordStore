@@ -171,4 +171,33 @@ public class LabelDaoSQLImpl implements LabelDao {
         }
         return null;
     }
+
+    @Override
+    public List<Label> searchByName(String name)
+    {
+        String query = "SELECT * FROM labels WHERE name = ?";
+        List<Label> labels = new ArrayList<>();
+        try
+        {
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setString(1,name);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Label label = new Label();
+                label.setId(rs.getInt("id"));
+                label.setName(rs.getString("name"));
+                label.setCountry(rs.getString("country"));
+                labels.add(label);
+            }
+            rs.close();
+            return labels;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

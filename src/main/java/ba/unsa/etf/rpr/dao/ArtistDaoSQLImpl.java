@@ -185,4 +185,5 @@ public class ArtistDaoSQLImpl implements ArtistDao {
         }
         return null;
     }
+
 }

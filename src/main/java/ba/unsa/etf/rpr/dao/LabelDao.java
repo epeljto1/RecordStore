@@ -12,4 +12,5 @@ public interface LabelDao extends Dao<Label> {
     // Returns list of all labels with the same country
     // as search parameter
     List<Label> searchByCountry(String country);
+    List<Label> searchByName(String name);
 }
