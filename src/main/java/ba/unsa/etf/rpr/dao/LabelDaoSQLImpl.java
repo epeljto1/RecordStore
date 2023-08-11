@@ -93,6 +93,17 @@ public class LabelDaoSQLImpl implements LabelDao {
     @Override
     public Label update(Label item)
     {
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE labels SET name=?, country=? WHERE id=?");
+            stmt.setString(1, item.getName());
+            stmt.setString(2, item.getCountry());
+            stmt.setInt(3, item.getId());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
