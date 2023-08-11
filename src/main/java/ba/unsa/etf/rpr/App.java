@@ -32,21 +32,10 @@ public class App
         // label.setCountry("United States");
         // labelDao.add(label);
 
-        ArtistDao artistDao = new ArtistDaoSQLImpl();
-        Label label = new Label();
-        label.setId(3);
-        label.setName("Columbia Records");
-        label.setCountry("United States");
-        Artist artist = new Artist();
-        artist.setId(2);
-        artist.setName("Beyoncé");
-        artist.setLabel(label);
-        artist.setCountry("US");
-        artist.setType("Singer");
-        artistDao.update(artist);
 
-        // LabelDao labelDao = new LabelDaoSQLImpl();
-        // labelDao.delete(2);
+
+        ArtistDao artistDao = new ArtistDaoSQLImpl();
+        artistDao.delete(2);
 
         // LabelDao labelDao = new LabelDaoSQLImpl();
         // Label label = labelDao.getAll().get(0);
