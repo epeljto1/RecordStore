@@ -34,16 +34,13 @@ public class App
 
 
 
-        ArtistDao artistDao = new ArtistDaoSQLImpl();
-        artistDao.delete(2);
-
-        // LabelDao labelDao = new LabelDaoSQLImpl();
-        // Label label = labelDao.getAll().get(0);
-        // if (label.getName().equals("Mute Records")) {
-        // System.out.println("The strings are equal.");
-         // } else {
-         // System.out.println("The strings are not equal.");
-         // }
+         ArtistDao artistDao = new ArtistDaoSQLImpl();
+         Artist artist = artistDao.getAll().get(1);
+        if (artist.getType().equals("Singer") && artist.getLabel().getName().equals("Parkwood Entertainment")) {
+         System.out.println("The strings are equal.");
+          } else {
+         System.out.println("The strings are not equal.");
+          }
 
         // LabelDao labelDao = new LabelDaoSQLImpl();
         // if (labelDao.searchByCountry("United States").size()==2 && labelDao.searchByCountry("United States").get(1).getName().equals("Columbia Records")) {
