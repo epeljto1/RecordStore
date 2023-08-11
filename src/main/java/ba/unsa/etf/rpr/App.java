@@ -32,12 +32,18 @@ public class App
         // label.setCountry("United States");
         // labelDao.add(label);
 
-        // LabelDao labelDao = new LabelDaoSQLImpl();
-        // Label label = new Label();
-        // label.setId(2);
-        // label.setName("Parkwood Entertainment");
-        // label.setCountry("US");
-        // labelDao.update(label);
+        ArtistDao artistDao = new ArtistDaoSQLImpl();
+        Label label = new Label();
+        label.setId(3);
+        label.setName("Columbia Records");
+        label.setCountry("United States");
+        Artist artist = new Artist();
+        artist.setId(2);
+        artist.setName("Beyoncé");
+        artist.setLabel(label);
+        artist.setCountry("US");
+        artist.setType("Singer");
+        artistDao.update(artist);
 
         // LabelDao labelDao = new LabelDaoSQLImpl();
         // labelDao.delete(2);
@@ -67,19 +73,6 @@ public class App
         // System.out.println("The strings are not equal.");
          // }
 
-        // Test add - ArtistDao
-        ArtistDao artistDao = new ArtistDaoSQLImpl();
-        Label label = new Label();
-        label.setId(2);
-        label.setName("Parkwood Entertainment");
-        label.setCountry("United States");
-        Artist artist = new Artist();
-        artist.setId(2);
-        artist.setName("Beyoncé");
-        artist.setLabel(label);
-        artist.setCountry("United States");
-        artist.setType("Singer");
-        artistDao.add(artist);
 
     }
 }
