@@ -74,8 +74,26 @@ public class ArtistDaoSQLImpl implements ArtistDao {
     }
 
     @Override
-    public Artist add(Artist item)
-    {
+    public Artist add(Artist item) {
+        int id = getMaxId();
+        String name = item.getName();
+        int label_id = item.getLabel().getId();
+        String country = item.getCountry();
+        String type = item.getType();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO artists (id, name, label_id, country, type) VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, id);
+            stmt.setString(2, name);
+            stmt.setInt(3, label_id);
+            stmt.setString(4, country);
+            stmt.setString(5, type);
+            stmt.executeUpdate();
+            item.setId(id);
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 

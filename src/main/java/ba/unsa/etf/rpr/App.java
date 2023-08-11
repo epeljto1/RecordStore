@@ -58,14 +58,28 @@ public class App
          // }
 
         // Test getById - ArtistDao
+        // ArtistDao artistDao = new ArtistDaoSQLImpl();
+        // int id = 1;
+        // Artist artist = artistDao.getById(id);
+        // if (artist.getName().equals("Depeche Mode") && artist.getLabel().getName().equals("Mute Records")) {
+         // System.out.println("The strings are equal.");
+         // } else {
+        // System.out.println("The strings are not equal.");
+         // }
+
+        // Test add - ArtistDao
         ArtistDao artistDao = new ArtistDaoSQLImpl();
-        int id = 1;
-        Artist artist = artistDao.getById(id);
-        if (artist.getName().equals("Depeche Mode") && artist.getLabel().getName().equals("Mute Records")) {
-         System.out.println("The strings are equal.");
-         } else {
-        System.out.println("The strings are not equal.");
-         }
+        Label label = new Label();
+        label.setId(2);
+        label.setName("Parkwood Entertainment");
+        label.setCountry("United States");
+        Artist artist = new Artist();
+        artist.setId(2);
+        artist.setName("Beyoncé");
+        artist.setLabel(label);
+        artist.setCountry("United States");
+        artist.setType("Singer");
+        artistDao.add(artist);
 
     }
 }
