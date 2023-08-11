@@ -180,7 +180,8 @@ public class ArtistDaoSQLImpl implements ArtistDao {
         }
         catch(SQLException e)
         {
-            e.printStackTrace();
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
         return null;
     }
