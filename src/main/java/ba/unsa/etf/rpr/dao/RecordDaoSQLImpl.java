@@ -51,4 +51,10 @@ public class RecordDaoSQLImpl implements RecordDao {
     {
         return null;
     }
+
+    @Override
+    public List<Record> searchByName(String name)
+    {
+        return null;
+    }
 }

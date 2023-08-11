@@ -11,5 +11,5 @@ import java.util.List;
 public interface RecordDao extends Dao<Record> {
     // Returns list of all records with the same name
     // as search parameter
-    List<Record> searchbyName(String name);
+    List<Record> searchByName(String name);
 }
