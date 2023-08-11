@@ -24,6 +24,23 @@ public class LabelDaoSQLImpl implements LabelDao {
         }
     }
 
+    private int getMaxId(){
+        int id=1;
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT MAX(id)+1 FROM labels");
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                id = rs.getInt(1);
+                rs.close();
+                return id;
+            }
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
+
     @Override
     public Label getById(int id) {
         try
