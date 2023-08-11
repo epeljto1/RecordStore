@@ -186,4 +186,37 @@ public class ArtistDaoSQLImpl implements ArtistDao {
         return null;
     }
 
+    @Override
+    public List<Artist> searchByLabel(String name)
+    {
+        String query = "SELECT * FROM artists WHERE label_id = ?";
+        List<Artist> artists = new ArrayList<>();
+        try
+        {
+            LabelDao labelDao = new LabelDaoSQLImpl();
+            Label label = labelDao.searchByName(name).get(0);
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1,label.getId());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Artist artist = new Artist();
+                artist.setId(rs.getInt("id"));
+                artist.setName(rs.getString("name"));
+                artist.setLabel(label);
+                artist.setCountry(rs.getString("country"));
+                artist.setType(rs.getString("type"));
+                artists.add(artist);
+            }
+            rs.close();
+            return artists;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return null;
+
+    }
+
 }

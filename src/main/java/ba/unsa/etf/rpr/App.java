@@ -34,9 +34,9 @@ public class App
 
 
 
-         LabelDao labelDao = new LabelDaoSQLImpl();
-         Label label = labelDao.searchByName("Mute Records").get(0);
-        if (label.getCountry().equals("United Kingdom")) {
+         ArtistDao artistDao = new ArtistDaoSQLImpl();
+         Artist artist = artistDao.searchByLabel("Parkwood Entertainment").get(0);
+        if (artist.getName().equals("Beyoncé") && artist.getLabel().getCountry().equals("United States")) {
          System.out.println("The strings are equal.");
           } else {
          System.out.println("The strings are not equal.");

@@ -12,4 +12,5 @@ public interface ArtistDao extends Dao<Artist> {
     // Returns list of all artists with the same name
     // as search parameter
     List<Artist> searchByName(String name);
+    List<Artist> searchByLabel(String name);
 }
