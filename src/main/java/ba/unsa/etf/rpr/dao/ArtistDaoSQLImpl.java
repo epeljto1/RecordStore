@@ -163,13 +163,16 @@ public class ArtistDaoSQLImpl implements ArtistDao {
         try
         {
             PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Artist artist = new Artist();
                 artist.setId(rs.getInt("id"));
                 artist.setName(rs.getString("name"));
+                LabelDao labelDao = new LabelDaoSQLImpl();
+                artist.setLabel(labelDao.getById(rs.getInt("label_id")));
                 artist.setCountry(rs.getString("country"));
-                artist.setCountry(rs.getString("type"));
+                artist.setType(rs.getString("type"));
                 artists.add(artist);
             }
             rs.close();
