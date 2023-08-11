@@ -110,6 +110,14 @@ public class LabelDaoSQLImpl implements LabelDao {
     @Override
     public void delete(int id)
     {
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM labels WHERE id = ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
 
     }
 

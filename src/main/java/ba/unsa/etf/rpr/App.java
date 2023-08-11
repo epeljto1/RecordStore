@@ -29,11 +29,14 @@ public class App
         // label.setCountry("United States");
         // labelDao.add(label);
 
+        // LabelDao labelDao = new LabelDaoSQLImpl();
+        // Label label = new Label();
+        // label.setId(2);
+        // label.setName("Parkwood Entertainment");
+        // label.setCountry("US");
+        // labelDao.update(label);
+
         LabelDao labelDao = new LabelDaoSQLImpl();
-        Label label = new Label();
-        label.setId(2);
-        label.setName("Parkwood Entertainment");
-        label.setCountry("US");
-        labelDao.update(label);
+        labelDao.delete(2);
     }
 }
