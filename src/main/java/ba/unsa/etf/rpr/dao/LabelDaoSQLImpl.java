@@ -20,7 +20,8 @@ public class LabelDaoSQLImpl implements LabelDao {
             conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Greska u radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
     }
 
