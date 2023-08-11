@@ -36,7 +36,16 @@ public class App
         // label.setCountry("US");
         // labelDao.update(label);
 
+        // LabelDao labelDao = new LabelDaoSQLImpl();
+        // labelDao.delete(2);
+
         LabelDao labelDao = new LabelDaoSQLImpl();
-        labelDao.delete(2);
+        Label label = labelDao.getAll().get(0);
+        if (label.getName().equals("Mute Records")) {
+        System.out.println("The strings are equal.");
+         } else {
+         System.out.println("The strings are not equal.");
+         }
+
     }
 }
