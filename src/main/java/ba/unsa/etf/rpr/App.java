@@ -52,20 +52,20 @@ public class App
 
         RecordDao recordDao = new RecordDaoSQLImpl();
         Record record = new Record();
-        record.setId(2);
-        record.setName("Violator");
+        record.setId(1);
+        record.setName("RENAISSANCE");
         ArtistDao artistDao = new ArtistDaoSQLImpl();
-        Artist artist = artistDao.getById(1);
+        Artist artist = artistDao.getById(2);
         record.setArtist(artist);
-        String str = "1990-03-19";
+        String str = "2022-07-29";
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date datum = format.parse(str);
             java.sql.Date datumsql = new java.sql.Date(datum.getTime());
             record.setRelease_date(datumsql);
-            record.setGenre("Electronic");
-            record.setCountry("United Kingdom");
-            recordDao.add(record);
+            record.setGenre("Pop");
+            record.setCountry("United States");
+            recordDao.update(record);
         }
         catch(java.text.ParseException e)
         {
