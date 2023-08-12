@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Record;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -128,7 +129,27 @@ public class RecordDaoSQLImpl implements RecordDao {
     @Override
     public List<Record> getAll()
     {
-        return null;
+        List<Record> records = new ArrayList<>();
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM records");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Record record = new Record();
+                record.setId(rs.getInt("id"));
+                record.setName(rs.getString("name"));
+                ArtistDao artistDao = new ArtistDaoSQLImpl();
+                record.setArtist(artistDao.getById(rs.getInt("artist_id")));
+                record.setRelease_date(rs.getDate("release_date"));
+                record.setGenre(rs.getString("genre"));
+                record.setCountry(rs.getString("country"));
+                records.add(record);
+            }
+            rs.close();
+        }catch (SQLException e){
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return records;
     }
 
     @Override

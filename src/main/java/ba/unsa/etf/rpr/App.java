@@ -51,21 +51,20 @@ public class App
          // }
 
         RecordDao recordDao = new RecordDaoSQLImpl();
-        Record record = new Record();
-        record.setId(1);
-        record.setName("RENAISSANCE");
-        ArtistDao artistDao = new ArtistDaoSQLImpl();
-        Artist artist = artistDao.getById(2);
-        record.setArtist(artist);
         String str = "2022-07-29";
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date datum = format.parse(str);
             java.sql.Date datumsql = new java.sql.Date(datum.getTime());
-            record.setRelease_date(datumsql);
-            record.setGenre("Pop");
-            record.setCountry("United States");
-            recordDao.update(record);
+            Record record = recordDao.getAll().get(0);
+            if(recordDao.getAll().size()==2 && record.getRelease_date().equals(datumsql))
+            {
+                System.out.println("Okay");
+            }
+            else
+            {
+                System.out.println("Not okay");
+            }
         }
         catch(java.text.ParseException e)
         {
