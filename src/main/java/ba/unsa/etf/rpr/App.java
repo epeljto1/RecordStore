@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Record;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -51,12 +53,19 @@ public class App
         RecordDao recordDao = new RecordDaoSQLImpl();
         int id = 1;
         Record record = recordDao.getById(id);
-        Date date = new Date();
-        if (record.getName().equals("RENAISSANCE") && record.getArtist().getName().equals("Beyoncé")) {
-         System.out.println("The strings are equal.");
-         } else {
-        System.out.println("The strings are not equal.");
-          }
+        String datum = "2022-10-07";
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+        Date date = format.parse(datum);
+            if (record.getName().equals("RENAISSANCE") && record.getArtist().getName().equals("Beyoncé") && record.getRelease_date().equals(date)) {
+                System.out.println("The strings are equal.");
+            } else {
+                System.out.println("The strings are not equal.\n");
+            }}
+        catch(java.text.ParseException e)
+        {
+            e.getMessage();
+        }
 
 
     }
