@@ -51,13 +51,15 @@ public class App
          // }
 
         RecordDao recordDao = new RecordDaoSQLImpl();
-        String str = "1990-03-19";
+        String str1 = "1990-01-19";
+        String str2 = "2023-08-12";
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date datum = format.parse(str);
+            Date datum = format.parse(str1);
+            Date datum2 = format.parse(str2);
             java.sql.Date datumsql = new java.sql.Date(datum.getTime());
-            Record record = recordDao.searchByArtist("Depeche Mode").get(0);
-            if(recordDao.searchByArtist("Depeche Mode").size()==1 && record.getRelease_date().equals(datumsql) && record.getName().equals("Violator"))
+            Record record = recordDao.searchByDateRange(datum,datum2).get(0);
+            if(recordDao.searchByDateRange(datum,datum2).size()==2 && record.getName().equals("RENAISSANCE"))
             {
                 System.out.println("Okay");
             }

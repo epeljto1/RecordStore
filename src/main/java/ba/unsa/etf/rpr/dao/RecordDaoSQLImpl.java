@@ -222,7 +222,31 @@ public class RecordDaoSQLImpl implements RecordDao {
     @Override
     public List<Record> searchByDateRange(Date start, Date end)
     {
-        return null;
+        List<Record> records = new ArrayList<>();
+        java.sql.Date startDate = new java.sql.Date(start.getTime());
+        java.sql.Date endDate = new java.sql.Date(end.getTime());
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM records WHERE release_date BETWEEN ? AND ?");
+            stmt.setDate(1,startDate);
+            stmt.setDate(2,endDate);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Record record = new Record();
+                record.setId(rs.getInt("id"));
+                record.setName(rs.getString("name"));
+                ArtistDao artistDao = new ArtistDaoSQLImpl();
+                record.setArtist(artistDao.getById(rs.getInt("artist_id")));
+                record.setRelease_date(rs.getDate("release_date"));
+                record.setGenre(rs.getString("genre"));
+                record.setCountry(rs.getString("country"));
+                records.add(record);
+            }
+            rs.close();
+        }catch (SQLException e){
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return records;
     }
 
 }
