@@ -12,4 +12,5 @@ public interface RecordDao extends Dao<Record> {
     // Returns list of all records with the same name
     // as search parameter
     List<Record> searchByName(String name);
+    List<Record> searchByArtist(String name);
 }

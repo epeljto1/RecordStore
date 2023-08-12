@@ -183,4 +183,10 @@ public class RecordDaoSQLImpl implements RecordDao {
         }
         return null;
     }
+
+    @Override
+    public List<Record> searchByArtist(String name)
+    {
+        return null;
+    }
 }
