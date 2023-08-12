@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Date;
 
 public class RecordDaoSQLImpl implements RecordDao {
     private Connection conn;
@@ -82,7 +83,7 @@ public class RecordDaoSQLImpl implements RecordDao {
         int artist_id = item.getArtist().getId();
         String country = item.getCountry();
         String genre = item.getGenre();
-        Date date = item.getRelease_date();
+        java.sql.Date date = item.getRelease_date();
         try {
             PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO records (id, name, artist_id, release_date, genre, country) VALUES (?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, id);
@@ -215,6 +216,12 @@ public class RecordDaoSQLImpl implements RecordDao {
             System.out.println("Problem pri radu sa bazom podataka");
             System.out.println(e.getMessage());
         }
+        return null;
+    }
+
+    @Override
+    public List<Record> searchByDateRange(Date start, Date end)
+    {
         return null;
     }
 
