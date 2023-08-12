@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.dao.*;
+import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 
 import java.text.DateFormat;
@@ -49,23 +50,28 @@ public class App
          // System.out.println("Not okay.");
          // }
 
-        // Test getById - ArtistDao
         RecordDao recordDao = new RecordDaoSQLImpl();
-        int id = 1;
-        Record record = recordDao.getById(id);
-        String datum = "2022-10-07";
+        Record record = new Record();
+        record.setId(2);
+        record.setName("Violator");
+        ArtistDao artistDao = new ArtistDaoSQLImpl();
+        Artist artist = artistDao.getById(1);
+        record.setArtist(artist);
+        String str = "1990-03-19";
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-        Date date = format.parse(datum);
-            if (record.getName().equals("RENAISSANCE") && record.getArtist().getName().equals("Beyoncé") && record.getRelease_date().equals(date)) {
-                System.out.println("The strings are equal.");
-            } else {
-                System.out.println("The strings are not equal.\n");
-            }}
+        try {
+            Date datum = format.parse(str);
+            java.sql.Date datumsql = new java.sql.Date(datum.getTime());
+            record.setRelease_date(datumsql);
+            record.setGenre("Electronic");
+            record.setCountry("United Kingdom");
+            recordDao.add(record);
+        }
         catch(java.text.ParseException e)
         {
             e.getMessage();
         }
+
 
 
     }

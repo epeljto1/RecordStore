@@ -75,6 +75,27 @@ public class RecordDaoSQLImpl implements RecordDao {
     @Override
     public Record add(Record item)
     {
+        int id = getMaxId();
+        String name = item.getName();
+        int artist_id = item.getArtist().getId();
+        String country = item.getCountry();
+        String genre = item.getGenre();
+        Date date = item.getRelease_date();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO records (id, name, artist_id, release_date, genre, country) VALUES (?, ?, ?, ?, ?, ?)");
+            stmt.setInt(1, id);
+            stmt.setString(2, name);
+            stmt.setInt(3, artist_id);
+            stmt.setDate(4, date);
+            stmt.setString(5, genre);
+            stmt.setString(6, country);
+            stmt.executeUpdate();
+            item.setId(id);
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
