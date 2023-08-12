@@ -33,6 +33,12 @@ public class RecordDaoSQLImpl implements RecordDao {
         if(rs.next()) {
             Record record = new Record();
             record.setId(rs.getInt("id"));
+            record.setName(rs.getString("name"));
+            ArtistDao artistDao = new ArtistDaoSQLImpl();
+            record.setArtist(artistDao.getById(rs.getInt("artist_id")));
+            record.setRelease_date(rs.getDate("release_date"));
+            record.setGenre(rs.getString("genre"));
+            record.setCountry("country");
             rs.close();
             return record;
         }
