@@ -1,10 +1,10 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -26,6 +26,26 @@ public class RecordDaoSQLImpl implements RecordDao {
 
     @Override
     public Record getById(int id) {
+        try {
+        PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM records WHERE id = ?");
+        stmt.setInt(1 ,id);
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next()) {
+            Record record = new Record();
+            record.setId(rs.getInt("id"));
+            rs.close();
+            return record;
+        }
+        else
+        {
+            return null;
+        }
+    }
+        catch(SQLException e)
+    {
+        System.out.println("Problem pri radu sa bazom podataka");
+        System.out.println(e.getMessage());
+    }
         return null;
     }
 
