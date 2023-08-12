@@ -56,8 +56,8 @@ public class App
         try {
             Date datum = format.parse(str);
             java.sql.Date datumsql = new java.sql.Date(datum.getTime());
-            Record record = recordDao.searchByName("Violator").get(0);
-            if(recordDao.searchByName("Violator").size()==1 && record.getRelease_date().equals(datumsql) && record.getArtist().getName().equals("Depeche Mode"))
+            Record record = recordDao.searchByArtist("Depeche Mode").get(0);
+            if(recordDao.searchByArtist("Depeche Mode").size()==1 && record.getRelease_date().equals(datumsql) && record.getName().equals("Violator"))
             {
                 System.out.println("Okay");
             }

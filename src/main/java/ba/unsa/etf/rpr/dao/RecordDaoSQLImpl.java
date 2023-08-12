@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Artist;
+import ba.unsa.etf.rpr.domain.Label;
 import ba.unsa.etf.rpr.domain.Record;
 
 import java.io.InputStream;
@@ -187,6 +188,33 @@ public class RecordDaoSQLImpl implements RecordDao {
     @Override
     public List<Record> searchByArtist(String name)
     {
+        String query = "SELECT * FROM records WHERE artist_id = ?";
+        List<Record> records = new ArrayList<>();
+        try
+        {
+            ArtistDao artistDao = new ArtistDaoSQLImpl();
+            Artist artist = artistDao.searchByName(name).get(0);
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1,artist.getId());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Record record = new Record();
+                record.setId(rs.getInt("id"));
+                record.setName(rs.getString("name"));
+                record.setArtist(artist);
+                record.setRelease_date(rs.getDate("release_date"));
+                record.setGenre(rs.getString("genre"));
+                record.setCountry(rs.getString("country"));
+                records.add(record);
+            }
+            rs.close();
+            return records;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 }
