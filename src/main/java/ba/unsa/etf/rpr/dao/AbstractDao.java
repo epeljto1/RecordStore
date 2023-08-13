@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -25,6 +26,9 @@ public abstract class AbstractDao<T> implements Dao<T> {
             System.out.println(e.getMessage());
         }
     }
+
+    public abstract T row2Object(ResultSet rs);
+    public abstract Map<String, T> object2Row(T object);
 
     @Override
     public T getById(int id) {
