@@ -6,7 +6,7 @@ import java.util.Objects;
  * Bean class for artists
  */
 
-public class Artist {
+public class Artist implements Identifiable {
     private int id;
     private String name;
     private Label label;

@@ -6,7 +6,7 @@ import java.util.Objects;
  * Bean class for labels
  */
 
-public class Label {
+public class Label implements Identifiable {
     private int id;
     private String name;
     private String country;

@@ -7,7 +7,7 @@ import java.util.Objects;
  * Bean class for records
  */
 
-public class Record {
+public class Record implements Identifiable {
     private int id;
     private String name;
     private Artist artist;
