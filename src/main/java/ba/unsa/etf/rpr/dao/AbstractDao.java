@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
+
 import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
@@ -31,7 +33,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     public abstract Map<String, T> object2Row(T object);
 
     @Override
-    public T getById(int id) {
+    public T getById(int id) throws RecordStoreException {
         String query = "SELECT * FROM ? WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -50,22 +52,22 @@ public abstract class AbstractDao<T> implements Dao<T> {
     }
 
     @Override
-    public T add(T item) {
+    public T add(T item) throws RecordStoreException {
         return null;
     }
 
     @Override
-    public T update(T item) {
+    public T update(T item) throws RecordStoreException {
         return null;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws RecordStoreException {
 
     }
 
     @Override
-    public List<T> getAll() {
+    public List<T> getAll() throws RecordStoreException {
         return null;
     }
 
