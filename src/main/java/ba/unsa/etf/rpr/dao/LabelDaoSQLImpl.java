@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Label;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
+
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,31 +34,19 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     }
 
     @Override
-    public Label getById(int id) {
-        try
-        {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM labels WHERE id = ?");
-            stmt.setInt(1 ,id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                Label label = new Label();
-                label.setId(rs.getInt("id"));
-                label.setName(rs.getString("name"));
-                label.setCountry(rs.getString("country"));
-                rs.close();
-                return label;
-            }
-            else
-            {
-                return null;
-            }
+    public Label row2Object(ResultSet rs) throws RecordStoreException
+    {
+        try {
+            Label label = new Label();
+            label.setId(rs.getInt("id"));
+            label.setName(rs.getString("name"));
+            label.setCountry(rs.getString("country"));
+            return label;
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
     @Override

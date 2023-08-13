@@ -29,7 +29,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
-    public abstract T row2Object(ResultSet rs);
+    public abstract T row2Object(ResultSet rs) throws RecordStoreException;
     public abstract Map<String, T> object2Row(T object);
 
     @Override
