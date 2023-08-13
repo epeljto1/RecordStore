@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -56,6 +57,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T add(T item) throws RecordStoreException {
+        Map<String,T>row = object2Row(item);
         return null;
     }
 
@@ -72,6 +74,24 @@ public abstract class AbstractDao<T> implements Dao<T> {
     @Override
     public List<T> getAll() throws RecordStoreException {
         return null;
+    }
+
+    private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row){
+        StringBuilder columns = new StringBuilder();
+        StringBuilder questions = new StringBuilder();
+
+        int counter = 0;
+        for (Map.Entry<String, Object> entry: row.entrySet()) {
+            counter++;
+            if (entry.getKey().equals("id")) continue;
+            columns.append(entry.getKey());
+            questions.append("?");
+            if (row.size() != counter) {
+                columns.append(",");
+                questions.append(",");
+            }
+        }
+        return new AbstractMap.SimpleEntry<String,String>(columns.toString(), questions.toString());
     }
 
 }
