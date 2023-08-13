@@ -1,28 +1,17 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Label;
-
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class LabelDaoSQLImpl implements LabelDao {
+public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     private Connection conn;
 
     public LabelDaoSQLImpl() {
-        Properties prop = new Properties();
-        try(InputStream input = LabelDaoSQLImpl.class.getResourceAsStream("/application.properties"))
-        {
-            prop.load(input);
-            conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
-        }
-        catch (Exception e) {
-            System.out.println("Greska u radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
+     super("labels");
     }
 
     private int getMaxId(){
