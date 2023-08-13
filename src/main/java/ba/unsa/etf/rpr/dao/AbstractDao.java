@@ -31,7 +31,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     }
 
     public abstract T row2Object(ResultSet rs) throws RecordStoreException;
-    public abstract Map<String, T> object2Row(T object);
+    public abstract Map<String, Object> object2Row(T object);
 
     @Override
     public T getById(int id) throws RecordStoreException {
@@ -57,7 +57,13 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T add(T item) throws RecordStoreException {
-        Map<String,T>row = object2Row(item);
+        Map<String,Object>row = object2Row(item);
+        Map.Entry<String, String> columns = prepareInsertParts(row);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("INSERT INTO ").append(table);
+        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append("VALUES (").append(columns.getValue()).append(")");
         return null;
     }
 
