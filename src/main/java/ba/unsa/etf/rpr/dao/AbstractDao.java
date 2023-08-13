@@ -19,7 +19,8 @@ public abstract class AbstractDao<T> implements Dao<T> {
             p.load(ClassLoader.getSystemResource("application.properties").openStream());
             this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Greska u radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
     }
 
