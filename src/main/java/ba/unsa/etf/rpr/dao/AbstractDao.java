@@ -1,8 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -29,6 +28,20 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T getById(int id) {
+        String query = "SELECT * FROM ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, table);
+            stmt.setInt(2, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                // TODO:
+                rs.close();
+                return item;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
