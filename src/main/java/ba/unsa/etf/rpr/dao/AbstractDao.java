@@ -30,6 +30,10 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
+    public Connection getConnection(){
+        return this.conn;
+    }
+
     public abstract T row2Object(ResultSet rs) throws RecordStoreException;
     public abstract Map<String, Object> object2Row(T object);
 
