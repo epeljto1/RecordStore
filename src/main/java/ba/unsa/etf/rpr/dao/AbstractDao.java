@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -22,6 +23,31 @@ public abstract class AbstractDao<T> implements Dao<T> {
             System.out.println("Greska u radu sa bazom podataka");
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public T getById(int id) {
+        return null;
+    }
+
+    @Override
+    public T add(T item) {
+        return null;
+    }
+
+    @Override
+    public T update(T item) {
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public List<T> getAll() {
+        return null;
     }
 
 }
