@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Label;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -9,20 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ArtistDaoSQLImpl implements ArtistDao {
+public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     private Connection conn;
 
     public ArtistDaoSQLImpl() {
-        Properties prop = new Properties();
-        try(InputStream input = LabelDaoSQLImpl.class.getResourceAsStream("/application.properties"))
-        {
-            prop.load(input);
-            conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
-        }
-        catch (Exception e) {
-            System.out.println("Greska u radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
+    super("artists");
     }
 
     private int getMaxId(){
@@ -43,34 +35,22 @@ public class ArtistDaoSQLImpl implements ArtistDao {
     }
 
     @Override
-    public Artist getById(int id) {
-        try
-        {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM artists WHERE id = ?");
-            stmt.setInt(1 ,id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                Artist artist = new Artist();
-                artist.setId(rs.getInt("id"));
-                artist.setName(rs.getString("name"));
-                LabelDao labelDao = new LabelDaoSQLImpl();
-                artist.setLabel(labelDao.getById(rs.getInt("label_id")));
-                artist.setCountry(rs.getString("country"));
-                artist.setType(rs.getString("type"));
-                rs.close();
-                return artist;
-            }
-            else
-            {
-                return null;
-            }
+    public Artist row2Object(ResultSet rs) throws RecordStoreException
+    {
+        try {
+            Artist artist = new Artist();
+            artist.setId(rs.getInt("id"));
+            artist.setName(rs.getString("name"));
+            LabelDao labelDao = new LabelDaoSQLImpl();
+            artist.setLabel(labelDao.getById(rs.getInt("label_id")));
+            artist.setCountry(rs.getString("country"));
+            artist.setType(rs.getString("type"));
+            return artist;
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
     @Override
