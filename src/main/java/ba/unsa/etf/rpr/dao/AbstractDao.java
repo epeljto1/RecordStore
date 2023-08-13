@@ -41,14 +41,17 @@ public abstract class AbstractDao<T> implements Dao<T> {
             stmt.setInt(2, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                // TODO:
+                T item = row2Object(rs);
                 rs.close();
                 return item;
             }
+            else
+            {
+                throw new RecordStoreException("Object not found");
+            }
         } catch(SQLException e) {
-            e.printStackTrace();
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
     @Override
