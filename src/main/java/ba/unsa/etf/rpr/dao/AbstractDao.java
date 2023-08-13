@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
@@ -17,7 +18,8 @@ public abstract class AbstractDao<T> implements Dao<T> {
         try {
             this.table = table;
             Properties p = new Properties();
-            p.load(ClassLoader.getSystemResource("application.properties").openStream());
+            InputStream input = LabelDaoSQLImpl.class.getResourceAsStream("/application.properties");
+            p.load(input);
             this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
         } catch (Exception e) {
             System.out.println("Greska u radu sa bazom podataka");
