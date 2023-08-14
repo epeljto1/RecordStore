@@ -70,7 +70,6 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
             while(rs.next()) {
                 labels.add(row2Object(rs));
             }
-            rs.close();
             return labels;
         }
         catch(SQLException e)
@@ -80,7 +79,7 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     }
 
     @Override
-    public List<Label> searchByName(String name)
+    public List<Label> searchByName(String name) throws RecordStoreException
     {
         String query = "SELECT * FROM labels WHERE name = ?";
         List<Label> labels = new ArrayList<>();
@@ -90,21 +89,14 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
             stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Label label = new Label();
-                label.setId(rs.getInt("id"));
-                label.setName(rs.getString("name"));
-                label.setCountry(rs.getString("country"));
-                labels.add(label);
+                labels.add(row2Object(rs));
             }
-            rs.close();
             return labels;
         }
         catch(SQLException e)
         {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
 }
