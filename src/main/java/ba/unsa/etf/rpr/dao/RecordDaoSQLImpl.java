@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Label;
 import ba.unsa.etf.rpr.domain.Record;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -36,12 +37,9 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     }
 
     @Override
-    public Record getById(int id) {
+    public Record row2Object(ResultSet rs) throws RecordStoreException
+    {
         try {
-        PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM records WHERE id = ?");
-        stmt.setInt(1 ,id);
-        ResultSet rs = stmt.executeQuery();
-        if(rs.next()) {
             Record record = new Record();
             record.setId(rs.getInt("id"));
             record.setName(rs.getString("name"));
@@ -49,21 +47,13 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
             record.setArtist(artistDao.getById(rs.getInt("artist_id")));
             record.setRelease_date(rs.getDate("release_date"));
             record.setGenre(rs.getString("genre"));
-            record.setCountry("country");
-            rs.close();
+            record.setCountry(rs.getString("country"));
             return record;
         }
-        else
+        catch (SQLException e)
         {
-            return null;
+            throw new RecordStoreException(e.getMessage(),e);
         }
-    }
-        catch(SQLException e)
-    {
-        System.out.println("Problem pri radu sa bazom podataka");
-        System.out.println(e.getMessage());
-    }
-        return null;
     }
 
     @Override
