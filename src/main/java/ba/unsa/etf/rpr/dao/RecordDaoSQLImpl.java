@@ -90,7 +90,7 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     }
 
     @Override
-    public List<Record> searchByArtist(String name)
+    public List<Record> searchByArtist(String name) throws RecordStoreException
     {
         String query = "SELECT * FROM records WHERE artist_id = ?";
         List<Record> records = new ArrayList<>();
@@ -102,24 +102,14 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
             stmt.setInt(1,artist.getId());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Record record = new Record();
-                record.setId(rs.getInt("id"));
-                record.setName(rs.getString("name"));
-                record.setArtist(artist);
-                record.setRelease_date(rs.getDate("release_date"));
-                record.setGenre(rs.getString("genre"));
-                record.setCountry(rs.getString("country"));
-                records.add(record);
+                records.add(row2Object(rs));
             }
-            rs.close();
             return records;
         }
         catch(SQLException e)
         {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
     @Override
