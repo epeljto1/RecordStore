@@ -70,7 +70,7 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
         List<Artist> artists = new ArrayList<>();
         try
         {
-            PreparedStatement stmt = this.conn.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -93,7 +93,7 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
         {
             LabelDao labelDao = new LabelDaoSQLImpl();
             Label label = labelDao.searchByName(name).get(0);
-            PreparedStatement stmt = this.conn.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setInt(1,label.getId());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {

@@ -85,7 +85,7 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
         List<Label> labels = new ArrayList<>();
         try
         {
-            PreparedStatement stmt = this.conn.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
