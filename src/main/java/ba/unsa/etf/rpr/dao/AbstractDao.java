@@ -5,10 +5,7 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.AbstractMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Abstract class for DAO CRUD methods
@@ -129,7 +126,20 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public List<T> getAll() throws RecordStoreException {
-        return null;
+        String query = "SELECT * FROM "+ table;
+        List<T> results = new ArrayList<T>();
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                T object = row2Object(rs);
+                results.add(object);
+            }
+            rs.close();
+            return results;
+        }catch (SQLException e){
+            throw new RecordStoreException(e.getMessage(), e);
+        }
     }
 
     private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row){
