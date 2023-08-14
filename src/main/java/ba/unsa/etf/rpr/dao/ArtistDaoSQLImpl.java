@@ -15,23 +15,6 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     super("artists");
     }
 
-    private int getMaxId(){
-        int id=1;
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT MAX(id)+1 FROM artists");
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                id = rs.getInt(1);
-                rs.close();
-                return id;
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return id;
-    }
-
     @Override
     public Artist row2Object(ResultSet rs) throws RecordStoreException
     {

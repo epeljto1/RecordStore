@@ -9,30 +9,12 @@ import java.io.InputStream;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-import java.util.Date;
 
 public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     private Connection conn;
 
     public RecordDaoSQLImpl() {
       super("records");
-    }
-
-    private int getMaxId(){
-        int id=1;
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT MAX(id)+1 FROM records");
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                id = rs.getInt(1);
-                rs.close();
-                return id;
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return id;
     }
 
     @Override
