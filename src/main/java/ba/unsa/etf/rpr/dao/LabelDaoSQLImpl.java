@@ -58,28 +58,6 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     }
 
     @Override
-    public List<Label> getAll()
-    {
-        List<Label> labels = new ArrayList<>();
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM labels");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
-                Label label = new Label();
-                label.setId(rs.getInt("id"));
-                label.setName(rs.getString("name"));
-                label.setCountry(rs.getString("country"));
-                labels.add(label);
-            }
-            rs.close();
-        }catch (SQLException e){
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return labels;
-    }
-
-    @Override
     public List<Label> searchByCountry(String name)
     {
         String query = "SELECT * FROM labels WHERE country = ?";

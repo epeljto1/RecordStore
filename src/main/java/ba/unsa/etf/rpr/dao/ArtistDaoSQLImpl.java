@@ -64,31 +64,6 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     }
 
     @Override
-    public List<Artist> getAll()
-    {
-        List<Artist> artists = new ArrayList<>();
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM artists");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
-                Artist artist = new Artist();
-                artist.setId(rs.getInt("id"));
-                artist.setName(rs.getString("name"));
-                LabelDao labelDao = new LabelDaoSQLImpl();
-                artist.setLabel(labelDao.getById(rs.getInt("label_id")));
-                artist.setCountry(rs.getString("country"));
-                artist.setType(rs.getString("type"));
-                artists.add(artist);
-            }
-            rs.close();
-        }catch (SQLException e){
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return artists;
-    }
-
-    @Override
     public List<Artist> searchByName(String name)
     {
         String query = "SELECT * FROM artists WHERE name = ?";
