@@ -64,7 +64,7 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     }
 
     @Override
-    public List<Artist> searchByName(String name)
+    public List<Artist> searchByName(String name) throws RecordStoreException
     {
         String query = "SELECT * FROM artists WHERE name = ?";
         List<Artist> artists = new ArrayList<>();
@@ -74,24 +74,14 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
             stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Artist artist = new Artist();
-                artist.setId(rs.getInt("id"));
-                artist.setName(rs.getString("name"));
-                LabelDao labelDao = new LabelDaoSQLImpl();
-                artist.setLabel(labelDao.getById(rs.getInt("label_id")));
-                artist.setCountry(rs.getString("country"));
-                artist.setType(rs.getString("type"));
-                artists.add(artist);
+                artists.add(row2Object(rs));
             }
-            rs.close();
             return artists;
         }
         catch(SQLException e)
         {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
+            throw new RecordStoreException(e.getMessage(),e);
         }
-        return null;
     }
 
     @Override
