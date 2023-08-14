@@ -41,7 +41,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     public T getById(int id) throws RecordStoreException {
         String query = "SELECT * FROM ? WHERE id = ?";
         try {
-            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setString(1, table);
             stmt.setInt(2, id);
             ResultSet rs = stmt.executeQuery();
