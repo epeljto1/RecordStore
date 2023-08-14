@@ -11,20 +11,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Date;
 
-public class RecordDaoSQLImpl implements RecordDao {
+public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     private Connection conn;
 
     public RecordDaoSQLImpl() {
-        Properties prop = new Properties();
-        try(InputStream input = LabelDaoSQLImpl.class.getResourceAsStream("/application.properties"))
-        {
-            prop.load(input);
-            conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
-        }
-        catch (Exception e) {
-            System.out.println("Greska u radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
+      super("records");
     }
 
     private int getMaxId(){
