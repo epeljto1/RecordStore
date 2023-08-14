@@ -7,9 +7,8 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.sql.Date;
+import java.util.*;
 import java.util.Date;
 
 public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
@@ -57,30 +56,16 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     }
 
     @Override
-    public Record add(Record item)
+    public Map<String,Object> object2Row(Record object)
     {
-        int id = getMaxId();
-        String name = item.getName();
-        int artist_id = item.getArtist().getId();
-        String country = item.getCountry();
-        String genre = item.getGenre();
-        java.sql.Date date = item.getRelease_date();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO records (id, name, artist_id, release_date, genre, country) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setInt(1, id);
-            stmt.setString(2, name);
-            stmt.setInt(3, artist_id);
-            stmt.setDate(4, date);
-            stmt.setString(5, genre);
-            stmt.setString(6, country);
-            stmt.executeUpdate();
-            item.setId(id);
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
+        Map<String, Object> row = new TreeMap<String, Object>();
+        row.put("id", object.getId());
+        row.put("name", object.getName());
+        row.put("artist_id", object.getArtist().getId());
+        row.put("release_date", object.getRelease_date());
+        row.put("genre", object.getGenre());
+        row.put("country", object.getCountry());
+        return row;
     }
 
     @Override
