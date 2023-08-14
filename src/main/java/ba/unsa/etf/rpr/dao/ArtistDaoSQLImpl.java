@@ -6,9 +6,7 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     private Connection conn;
@@ -54,27 +52,15 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     }
 
     @Override
-    public Artist add(Artist item) {
-        int id = getMaxId();
-        String name = item.getName();
-        int label_id = item.getLabel().getId();
-        String country = item.getCountry();
-        String type = item.getType();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO artists (id, name, label_id, country, type) VALUES (?, ?, ?, ?, ?)");
-            stmt.setInt(1, id);
-            stmt.setString(2, name);
-            stmt.setInt(3, label_id);
-            stmt.setString(4, country);
-            stmt.setString(5, type);
-            stmt.executeUpdate();
-            item.setId(id);
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
+    public Map<String,Object> object2Row(Artist object)
+    {
+        Map<String, Object> row = new TreeMap<String, Object>();
+        row.put("id", object.getId());
+        row.put("name", object.getName());
+        row.put("label_id", object.getLabel().getId());
+        row.put("country", object.getCountry());
+        row.put("type", object.getType());
+        return row;
     }
 
     @Override
