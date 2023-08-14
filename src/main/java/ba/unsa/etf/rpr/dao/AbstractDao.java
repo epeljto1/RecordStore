@@ -90,7 +90,29 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public T update(T item) throws RecordStoreException {
-        return null;
+        Map<String, Object> row = object2Row(item);
+        String updateColumns = prepareUpdateParts(row);
+        StringBuilder builder = new StringBuilder();
+        builder.append("UPDATE ")
+                .append(table)
+                .append(" SET ")
+                .append(updateColumns)
+                .append(" WHERE id = ?");
+
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
+            int counter = 1;
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("id")) continue;
+                stmt.setObject(counter, entry.getValue());
+                counter++;
+            }
+            stmt.setObject(counter+1, item.getId());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            throw new RecordStoreException(e.getMessage(), e);
+        }
     }
 
     @Override
