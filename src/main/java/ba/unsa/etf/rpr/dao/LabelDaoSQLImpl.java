@@ -5,9 +5,7 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     private Connection conn;
@@ -50,24 +48,13 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     }
 
     @Override
-    public Label add(Label item)
+    public Map<String,Object> object2Row(Label object)
     {
-        int id = getMaxId();
-        String name = item.getName();
-        String country = item.getCountry();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO labels (id, name, country) VALUES (?, ?, ?)");
-            stmt.setInt(1,id);
-            stmt.setString(2,name);
-            stmt.setString(3,country);
-            stmt.executeUpdate();
-            item.setId(id);
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
+        Map<String, Object> row = new TreeMap<String, Object>();
+        row.put("id", object.getId());
+        row.put("name", object.getName());
+        row.put("country", object.getCountry());
+        return row;
     }
 
     @Override
