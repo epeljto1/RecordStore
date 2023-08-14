@@ -69,26 +69,6 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     }
 
     @Override
-    public Record update(Record item)
-    {
-        try{
-        PreparedStatement stmt = this.conn.prepareStatement("UPDATE records SET name=?, artist_id=?, release_date=?, genre=?, country=? WHERE id=?");
-        stmt.setString(1, item.getName());
-        stmt.setInt(2, item.getArtist().getId());
-        stmt.setDate(3, item.getRelease_date());
-        stmt.setString(4, item.getGenre());
-        stmt.setString(5, item.getCountry());
-        stmt.setInt(6, item.getId());
-        stmt.executeUpdate();
-        return item;
-    }catch (SQLException e){
-        System.out.println("Problem pri radu sa bazom podataka");
-        System.out.println(e.getMessage());
-    }
-        return null;
-    }
-
-    @Override
     public void delete(int id)
     {
         try{

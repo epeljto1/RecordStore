@@ -64,25 +64,6 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     }
 
     @Override
-    public Artist update(Artist item)
-    {
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE artists SET name=?, label_id=?, country=?, type=? WHERE id=?");
-            stmt.setString(1, item.getName());
-            stmt.setInt(2, item.getLabel().getId());
-            stmt.setString(3, item.getCountry());
-            stmt.setString(4, item.getType());
-            stmt.setInt(5, item.getId());
-            stmt.executeUpdate();
-            return item;
-        }catch (SQLException e){
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-    @Override
     public void delete(int id)
     {
         try{
