@@ -58,20 +58,6 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     }
 
     @Override
-    public void delete(int id)
-    {
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM labels WHERE id = ?");
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        }catch (SQLException e){
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    @Override
     public List<Label> getAll()
     {
         List<Label> labels = new ArrayList<>();
