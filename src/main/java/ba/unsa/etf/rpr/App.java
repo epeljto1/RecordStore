@@ -14,16 +14,8 @@ import java.util.Date;
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args ) throws RecordStoreException
-    {
-       LabelDao labelDao = DaoFactory.labelDao();
-        Label label = labelDao.getAll().get(0);
-        if (label.getName().equals("Mute Records") && labelDao.getAll().size()==2) {
-            System.out.println("The strings are equal.");
-        } else {
-            System.out.println("The strings are not equal.");
-        }
+public class App {
+    public static void main(String[] args) throws RecordStoreException {
+
     }
 }
