@@ -66,7 +66,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("INSERT INTO ").append(table);
+        builder.append("INSERT INTO ").append(getTable());
         builder.append(" (").append(columns.getKey()).append(") ");
         builder.append("VALUES (").append(columns.getValue()).append(")");
 
