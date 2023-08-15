@@ -15,7 +15,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     private Connection conn;
     private String table;
 
-    public AbstractDao(String tableName) {
+    public AbstractDao(String table) {
         try {
             this.table = table;
             Properties p = new Properties();
@@ -31,17 +31,20 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     public Connection getConnection(){
         return this.conn;
     }
+    public String getTable()
+    {
+        return this.table;
+    }
 
     public abstract T row2Object(ResultSet rs) throws RecordStoreException;
     public abstract Map<String, Object> object2Row(T object);
 
     @Override
     public T getById(int id) throws RecordStoreException {
-        String query = "SELECT * FROM ? WHERE id = ?";
+        String query = "SELECT * FROM "+getTable()+" WHERE id = ?";
         try {
-            PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setString(1, table);
-            stmt.setInt(2, id);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
                 T item = row2Object(rs);
