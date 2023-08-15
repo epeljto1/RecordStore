@@ -78,7 +78,7 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
         List<Record> records = new ArrayList<>();
         try
         {
-            ArtistDao artistDao = new ArtistDaoSQLImpl();
+            ArtistDao artistDao = DaoFactory.artistDao();
             Artist artist = artistDao.searchByName(name).get(0);
             PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setInt(1,artist.getId());

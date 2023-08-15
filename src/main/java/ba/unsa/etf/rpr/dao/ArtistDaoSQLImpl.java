@@ -74,7 +74,7 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
         List<Artist> artists = new ArrayList<>();
         try
         {
-            LabelDao labelDao = new LabelDaoSQLImpl();
+            LabelDao labelDao = DaoFactory.labelDao();
             Label label = labelDao.searchByName(name).get(0);
             PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setInt(1,label.getId());
