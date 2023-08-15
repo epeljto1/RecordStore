@@ -117,7 +117,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public void delete(int id) throws RecordStoreException {
-        String sql = "DELETE FROM "+table+" WHERE id = ?";
+        String sql = "DELETE FROM "+getTable()+" WHERE id = ?";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);

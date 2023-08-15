@@ -23,6 +23,6 @@ public class App
        label.setName("Columbia Records");
        label.setCountry("US");
        LabelDao labelDao = DaoFactory.labelDao();
-       labelDao.update(label);
+       labelDao.delete(5);
     }
 }
