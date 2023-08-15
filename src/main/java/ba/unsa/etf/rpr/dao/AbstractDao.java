@@ -129,7 +129,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public List<T> getAll() throws RecordStoreException {
-        String query = "SELECT * FROM "+ table;
+        String query = "SELECT * FROM "+ getTable();
         List<T> results = new ArrayList<T>();
         try{
             PreparedStatement stmt = getConnection().prepareStatement(query);

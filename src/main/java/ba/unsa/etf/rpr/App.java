@@ -18,11 +18,12 @@ public class App
 {
     public static void main( String[] args ) throws RecordStoreException
     {
-       Label label = new Label();
-       label.setId(5);
-       label.setName("Columbia Records");
-       label.setCountry("US");
        LabelDao labelDao = DaoFactory.labelDao();
-       labelDao.delete(5);
+        Label label = labelDao.getAll().get(0);
+        if (label.getName().equals("Mute Records") && labelDao.getAll().size()==2) {
+            System.out.println("The strings are equal.");
+        } else {
+            System.out.println("The strings are not equal.");
+        }
     }
 }
