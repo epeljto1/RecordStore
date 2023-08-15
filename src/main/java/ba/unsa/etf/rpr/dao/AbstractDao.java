@@ -94,7 +94,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         String updateColumns = prepareUpdateParts(row);
         StringBuilder builder = new StringBuilder();
         builder.append("UPDATE ")
-                .append(table)
+                .append(getTable())
                 .append(" SET ")
                 .append(updateColumns)
                 .append(" WHERE id = ?");
@@ -107,7 +107,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
-            stmt.setObject(counter+1, item.getId());
+            stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){

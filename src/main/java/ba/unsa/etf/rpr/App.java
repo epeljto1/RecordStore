@@ -18,6 +18,11 @@ public class App
 {
     public static void main( String[] args ) throws RecordStoreException
     {
-
+       Label label = new Label();
+       label.setId(5);
+       label.setName("Columbia Records");
+       label.setCountry("US");
+       LabelDao labelDao = DaoFactory.labelDao();
+       labelDao.update(label);
     }
 }
