@@ -24,6 +24,32 @@ public class Record implements Identifiable {
         private Date release_date = new Date(System.currentTimeMillis());
         private String genre = "";
         private String country = "";
+
+        public Builder(int id, String name)
+        {
+            this.id = id;
+            this.name = name;
+        }
+
+        public Builder artist(Artist val)
+        {
+            artist = val; return this;
+        }
+
+        public Builder release_date(Date val)
+        {
+            release_date = val; return this;
+        }
+
+        public Builder genre(String val)
+        {
+            genre = val; return this;
+        }
+
+        public Builder country(String val)
+        {
+            country = val; return this;
+        }
     }
     public int getId() {
         return id;
