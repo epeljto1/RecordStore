@@ -11,10 +11,12 @@ public class Label implements Identifiable {
     private String name;
     private String country;
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

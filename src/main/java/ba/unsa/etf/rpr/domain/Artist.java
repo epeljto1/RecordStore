@@ -13,10 +13,12 @@ public class Artist implements Identifiable {
     private String country;
     private String type;
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id)
     {
         this.id = id;
