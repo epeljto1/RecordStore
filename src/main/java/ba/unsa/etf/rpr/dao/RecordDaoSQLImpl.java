@@ -21,7 +21,7 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     public Record row2Object(ResultSet rs) throws RecordStoreException
     {
         try {
-            Record record = new Record();
+            Record record = new Record.Builder(rs.getInt("id"),rs.getString("name")).build();
             record.setId(rs.getInt("id"));
             record.setName(rs.getString("name"));
             ArtistDao artistDao = new ArtistDaoSQLImpl();
