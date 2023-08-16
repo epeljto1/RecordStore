@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import ba.unsa.etf.rpr.dao.DaoFactory;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -15,6 +17,14 @@ public class Record implements Identifiable {
     private String genre;
     private String country;
 
+    public static class Builder {
+        private int id;
+        private String name;
+        private Artist artist = new Artist();
+        private Date release_date = new Date(System.currentTimeMillis());
+        private String genre = "";
+        private String country = "";
+    }
     public int getId() {
         return id;
     }
