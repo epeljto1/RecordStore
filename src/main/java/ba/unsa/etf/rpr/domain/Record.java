@@ -17,6 +17,16 @@ public class Record implements Identifiable {
     private String genre;
     private String country;
 
+    private Record(Builder builder)
+    {
+        id = builder.id;
+        name = builder.name;
+        artist = builder.artist;
+        release_date = builder.release_date;
+        genre = builder.genre;
+        country = builder.country;
+    }
+
     public static class Builder {
         private int id;
         private String name;
@@ -49,6 +59,11 @@ public class Record implements Identifiable {
         public Builder country(String val)
         {
             country = val; return this;
+        }
+
+        public Record build()
+        {
+            return new Record(this);
         }
     }
     public int getId() {
