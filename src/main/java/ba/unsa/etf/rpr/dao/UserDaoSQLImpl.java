@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -39,5 +40,24 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
         row.put("username", object.getUsername());
         row.put("password", object.getPassword());
         return row;
+    }
+
+    @Override
+    public User getUser(String username, String password) throws RecordStoreException
+    {
+        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                User user = row2Object(rs);
+                return user;
+            }
+        } catch(SQLException e) {
+            throw new RecordStoreException(e.getMessage(), e);
+        }
+        throw new RecordStoreException("User not found.");
     }
 }
