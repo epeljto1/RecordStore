@@ -5,6 +5,8 @@ public class DaoFactory {
     private static final ArtistDao artistDao = new ArtistDaoSQLImpl();
     private static final RecordDao recordDao = new RecordDaoSQLImpl();
 
+    private static final UserDao userDao = new UserDaoSQLImpl();
+
     private DaoFactory(){}
 
     public static LabelDao labelDao()
@@ -21,4 +23,6 @@ public class DaoFactory {
     {
         return recordDao;
     }
+
+    public static UserDao userDao() { return userDao; }
 }
