@@ -39,13 +39,13 @@ public class SignupController {
         });
     }
 
-    public void registerAction(ActionEvent actionEvent) throws RecordStoreException {
+    public void signupAction(ActionEvent actionEvent) throws RecordStoreException {
         User user = new User();
         try {
             user.setUsername(usernameField.getText());
             user.setPassword(userManager.hashPassword(passwordField.getText()));
 
-            userManager.validateSignUp(usernameField.getText(), confirmPasswordField.getText());
+            userManager.validateSignUp(passwordField.getText(), confirmPasswordField.getText());
             userManager.add(user);
         } catch (UserException | RecordStoreException e) {
             if(e instanceof UserException) errorMsgLabel.setText(e.getMessage());

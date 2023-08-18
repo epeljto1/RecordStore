@@ -1,9 +1,9 @@
 .default {
-    -fx-background-color: #000000;
+    -fx-background-color: #ffffff;
 }
 
 .invalid {
-    -fx-background-color: #000000;
+    -fx-background-color: #ffffff;
 }
 
 #separator *.line {
