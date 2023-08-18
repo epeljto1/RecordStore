@@ -47,4 +47,14 @@ public class UserManager {
     {
         return DaoFactory.userDao().update(user);
     }
+
+    /**
+     * Removes user from DB based on ID
+     * @param id
+     * @throws RecordStoreException
+     */
+    public void delete(int id) throws RecordStoreException
+    {
+        DaoFactory.userDao().delete(id);
+    }
 }
