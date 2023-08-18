@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
+import ba.unsa.etf.rpr.exceptions.UserException;
 
 import java.util.List;
 
@@ -75,5 +76,14 @@ public class UserManager {
     public User getUser(String username, String password) throws RecordStoreException
     {
         return DaoFactory.userDao().getUser(username,password);
+    }
+
+    public void validateLogin(String password) throws UserException {
+        final int minPasswordLength = 5;
+
+        if(password.length() < minPasswordLength)
+            throw new UserException("Password needs to be at least " + minPasswordLength + " characters.");
+        if(!password.matches("^(?=.*\\d)(?=.*[A-Z]).{8,}$"))
+            throw new UserException("Password needs to contain at least one uppercase letter and one number.");
     }
 }
