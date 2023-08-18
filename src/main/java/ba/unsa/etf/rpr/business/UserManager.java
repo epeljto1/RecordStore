@@ -5,6 +5,11 @@ import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import ba.unsa.etf.rpr.exceptions.UserException;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 /**
@@ -78,12 +83,33 @@ public class UserManager {
         return DaoFactory.userDao().getUser(username,password);
     }
 
-    public void validateLogin(String password) throws UserException {
+    /**
+     * Checks if user's password satisfies given constraints during sign up
+     * @param password
+     * @throws UserException
+     */
+    public void validateSignUp(String password, String confirmed) throws UserException {
         final int minPasswordLength = 5;
 
         if(password.length() < minPasswordLength)
             throw new UserException("Password needs to be at least " + minPasswordLength + " characters.");
         if(!password.matches("^(?=.*\\d)(?=.*[A-Z]).{8,}$"))
             throw new UserException("Password needs to contain at least one uppercase letter and one number.");
+        if(!password.equals(confirmed))
+            throw new UserException("Passwords do not match.");
+    }
+
+    /**
+     * Hashes the password
+     * @param password
+     * @return hashed password
+     * @throws NoSuchAlgorithmException
+     */
+    public String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-1");
+        String salt = "maven";
+        md.update(salt.getBytes());
+        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        return new BigInteger(1, hashedPassword).toString(16);
     }
 }
