@@ -10,5 +10,8 @@ public class UserManager {
         return DaoFactory.userDao().getUser(username,password);
     }
 
-
+    public User add(User user) throws RecordStoreException
+    {
+        return DaoFactory.userDao().add(user);
+    }
 }
