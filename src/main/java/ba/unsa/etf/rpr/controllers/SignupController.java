@@ -1,15 +1,22 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
+import ba.unsa.etf.rpr.exceptions.UserException;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.security.NoSuchAlgorithmException;
 
 public class SignupController {
     public TextField usernameField;
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
+    public Label errorMsgLabel;
 
     private final UserManager userManager = new UserManager();
 
@@ -30,6 +37,24 @@ public class SignupController {
             if(n.trim().isEmpty() || !n.equals(passwordField.getText())) setInvalidStyles(confirmPasswordField);
             else removeInvalidStyles(confirmPasswordField);
         });
+    }
+
+    public void registerAction(ActionEvent actionEvent) throws RecordStoreException {
+        User user = new User();
+        try {
+            user.setUsername(usernameField.getText());
+            user.setPassword(userManager.hashPassword(passwordField.getText()));
+
+            userManager.validateSignUp(usernameField.getText(), confirmPasswordField.getText());
+            userManager.add(user);
+        } catch (UserException | RecordStoreException e) {
+            if(e instanceof UserException) errorMsgLabel.setText(e.getMessage());
+            else errorMsgLabel.setText("User already exists.");
+            errorMsgLabel.setVisible(true);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void setInvalidStyles(TextField textField) {
