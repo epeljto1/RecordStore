@@ -7,6 +7,8 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 public class UserManager {
     public User getUser(String username, String password) throws RecordStoreException
     {
-        return null;
+        return DaoFactory.userDao().getUser(username,password);
     }
+
+
 }
