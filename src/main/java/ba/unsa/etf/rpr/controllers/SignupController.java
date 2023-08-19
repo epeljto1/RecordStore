@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
@@ -19,6 +20,7 @@ public class SignupController {
     public Label errorMsgLabel;
 
     private final UserManager userManager = new UserManager();
+    private final TabManager tabManager = new TabManager();
 
     public void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
@@ -54,7 +56,10 @@ public class SignupController {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public void closeAction(ActionEvent actionEvent) {
+        tabManager.closeWindow(actionEvent);
     }
 
     private void setInvalidStyles(TextField textField) {
