@@ -87,7 +87,7 @@
                                 <Insets />
                             </VBox.margin>
                         </Separator>
-                        <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #000000;" text="OR SIGN UP" textFill="f4c0d7">
+                        <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goToSignupAction" style="-fx-background-color: #000000;" text="OR SIGN UP" textFill="f4c0d7">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>

@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -29,7 +30,9 @@ public class LoginController {
             else removeInvalidStyles(passwordField);
         });
     }
-
+    public void goToSignupAction(ActionEvent actionEvent) throws RecordStoreException {
+        tabManager.changeWindow("Signup", "Sign up", new SignupController(), actionEvent);
+    }
     public void closeAction(ActionEvent actionEvent) {
         tabManager.closeWindow(actionEvent);
     }
