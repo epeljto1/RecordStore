@@ -62,6 +62,10 @@ public class SignupController {
         tabManager.closeWindow(actionEvent);
     }
 
+    public void goToLoginAction(ActionEvent actionEvent) throws RecordStoreException {
+        tabManager.changeWindow("Login", "Login", new LoginController(), actionEvent);
+    }
+
     private void setInvalidStyles(TextField textField) {
         textField.getStyleClass().removeAll("default");
         textField.getStyleClass().add("invalid");
