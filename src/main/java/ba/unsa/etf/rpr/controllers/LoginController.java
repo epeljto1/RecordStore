@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.business.UserManager;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,7 +13,7 @@ public class LoginController {
     public PasswordField passwordField;
     public Label errorMsgLabel;
 
-    private final TabManager windowManager = new TabManager();
+    private final TabManager tabManager = new TabManager();
     private final UserManager userManager = new UserManager();
 
     public void initialize() {
@@ -27,6 +28,10 @@ public class LoginController {
             if(n.trim().isEmpty()) setInvalidStyles(passwordField);
             else removeInvalidStyles(passwordField);
         });
+    }
+
+    public void closeAction(ActionEvent actionEvent) {
+        tabManager.closeWindow(actionEvent);
     }
 
     private void setInvalidStyles(TextField textField) {
