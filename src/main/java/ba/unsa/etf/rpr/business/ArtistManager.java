@@ -37,4 +37,14 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().update(artist);
     }
+
+    /**
+     * Removes artist from DB based on ID
+     * @param id
+     * @throws RecordStoreException
+     */
+    public void delete(int id) throws RecordStoreException
+    {
+        DaoFactory.artistDao().delete(id);
+    }
 }
