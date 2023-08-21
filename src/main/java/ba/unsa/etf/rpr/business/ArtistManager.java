@@ -26,4 +26,15 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().add(artist);
     }
+
+    /**
+     * Updates an artist to DB
+     * @param artist
+     * @return artist
+     * @throws RecordStoreException
+     */
+    public Artist update(Artist artist) throws RecordStoreException
+    {
+        return DaoFactory.artistDao().update(artist);
+    }
 }
