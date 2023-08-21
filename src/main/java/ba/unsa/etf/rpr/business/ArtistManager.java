@@ -59,4 +59,15 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().getAll();
     }
+
+    /**
+     * Returns artist from DB based on name
+     * @param name
+     * @return list of artists
+     * @throws RecordStoreException
+     */
+    public List<Artist> searchByName(String name) throws RecordStoreException
+    {
+        return DaoFactory.artistDao().searchByName(name);
+    }
 }
