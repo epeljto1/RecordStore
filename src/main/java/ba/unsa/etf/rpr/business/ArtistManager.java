@@ -70,4 +70,15 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().searchByName(name);
     }
+
+    /**
+     * Returns artist from DB based on label
+     * @param label
+     * @return list of artists
+     * @throws RecordStoreException
+     */
+    public List<Artist> searchByLabel(String label) throws RecordStoreException
+    {
+        return DaoFactory.artistDao().searchByLabel(label);
+    }
 }
