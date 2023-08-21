@@ -59,4 +59,15 @@ public class LabelManager {
     {
         return DaoFactory.labelDao().getAll();
     }
+
+    /**
+     * Returns label from DB based on country
+     * @param country
+     * @return
+     * @throws RecordStoreException
+     */
+    public List<Label> searchByCountry(String country) throws RecordStoreException
+    {
+        return DaoFactory.labelDao().searchByCountry(country);
+    }
 }
