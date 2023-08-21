@@ -15,4 +15,15 @@ public class LabelManager {
     {
         return DaoFactory.labelDao().getById(id);
     }
+
+    /**
+     * Adds label to DB
+     * @param label
+     * @return label
+     * @throws RecordStoreException
+     */
+    public Label add(Label label) throws RecordStoreException
+    {
+        return DaoFactory.labelDao().add(label);
+    }
 }
