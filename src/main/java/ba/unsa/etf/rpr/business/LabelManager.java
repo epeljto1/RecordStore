@@ -37,4 +37,14 @@ public class LabelManager {
     {
         return DaoFactory.labelDao().update(label);
     }
+
+    /**
+     * Removes label from DB based on ID
+     * @param id
+     * @throws RecordStoreException
+     */
+    public void delete(int id) throws RecordStoreException
+    {
+        DaoFactory.labelDao().delete(id);
+    }
 }
