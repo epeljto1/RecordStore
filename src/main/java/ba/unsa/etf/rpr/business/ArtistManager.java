@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
+import java.util.List;
+
 public class ArtistManager {
     /**
      * Returns artist from DB based on ID
@@ -46,5 +48,15 @@ public class ArtistManager {
     public void delete(int id) throws RecordStoreException
     {
         DaoFactory.artistDao().delete(id);
+    }
+
+    /**
+     * Returns all artists from DB
+     * @return list of artists
+     * @throws RecordStoreException
+     */
+    public List<Artist> getAll() throws RecordStoreException
+    {
+        return DaoFactory.artistDao().getAll();
     }
 }
