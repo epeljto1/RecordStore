@@ -15,4 +15,15 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().getById(id);
     }
+
+    /**
+     * Adds an artist to DB
+     * @param artist
+     * @return artist
+     * @throws RecordStoreException
+     */
+    public Artist add(Artist artist) throws RecordStoreException
+    {
+        return DaoFactory.artistDao().add(artist);
+    }
 }
