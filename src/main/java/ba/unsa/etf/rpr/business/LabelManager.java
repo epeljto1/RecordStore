@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Label;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
+import java.util.List;
+
 public class LabelManager {
     /**
      * Returns label from DB based on ID
@@ -46,5 +48,15 @@ public class LabelManager {
     public void delete(int id) throws RecordStoreException
     {
         DaoFactory.labelDao().delete(id);
+    }
+
+    /**
+     * Returns all labels from DB
+     * @return list of labels
+     * @throws RecordStoreException
+     */
+    public List<Label> getAll() throws RecordStoreException
+    {
+        return DaoFactory.labelDao().getAll();
     }
 }
