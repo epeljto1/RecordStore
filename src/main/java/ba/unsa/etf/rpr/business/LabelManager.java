@@ -63,11 +63,22 @@ public class LabelManager {
     /**
      * Returns label from DB based on country
      * @param country
-     * @return
+     * @return label
      * @throws RecordStoreException
      */
     public List<Label> searchByCountry(String country) throws RecordStoreException
     {
         return DaoFactory.labelDao().searchByCountry(country);
+    }
+
+    /**
+     * Returns label from DB based on name
+     * @param name
+     * @return label
+     * @throws RecordStoreException
+     */
+    public List<Label> searchByName(String name) throws RecordStoreException
+    {
+        return DaoFactory.labelDao().searchByName(name);
     }
 }
