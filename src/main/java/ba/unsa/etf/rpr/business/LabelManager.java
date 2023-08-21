@@ -17,7 +17,7 @@ public class LabelManager {
     }
 
     /**
-     * Adds label to DB
+     * Adds a label to DB
      * @param label
      * @return label
      * @throws RecordStoreException
@@ -25,5 +25,16 @@ public class LabelManager {
     public Label add(Label label) throws RecordStoreException
     {
         return DaoFactory.labelDao().add(label);
+    }
+
+    /**
+     * Updates a label in DB
+     * @param label
+     * @return label
+     * @throws RecordStoreException
+     */
+    public Label update(Label label) throws RecordStoreException
+    {
+        return DaoFactory.labelDao().update(label);
     }
 }
