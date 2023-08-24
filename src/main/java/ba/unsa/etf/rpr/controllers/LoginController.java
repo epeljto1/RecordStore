@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -17,6 +18,7 @@ public class LoginController {
     private final TabManager tabManager = new TabManager();
     private final UserManager userManager = new UserManager();
 
+    @FXML
     public void initialize() {
         Platform.runLater(() -> usernameField.requestFocus()); // needed to set focus on username field
 

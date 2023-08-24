@@ -1,15 +1,21 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ArtistManager;
 import ba.unsa.etf.rpr.business.RecordManager;
 import ba.unsa.etf.rpr.business.TabManager;
-import ba.unsa.etf.rpr.domain.Label;
+import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+
 
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class HomeController {
     public Label usernameLabel;
@@ -23,13 +29,15 @@ public class HomeController {
     private final RecordManager recordManager = new RecordManager();
     private final List<Record> records;
     private final String username;
-    private final List<Record> filteredRecords;
+    private List<Record> filteredRecords;
+    private final List<Artist> artists;
 
     public HomeController(String username)
     {
         try
         {
             records = FXCollections.observableList(recordManager.getAll());
+            artists = FXCollections.observableList(new ArtistManager().getAll());
         }
         catch(RecordStoreException e)
         {
@@ -39,5 +47,29 @@ public class HomeController {
 
         this.username = username;
         filteredRecords = records;
+    }
+
+    @FXML
+    public void initialize() {
+        usernameLabel.setText("WELCOME, " + username);
+        recordsListView.setItems(FXCollections.observableList(filteredRecords));
+
+        searchField.textProperty().addListener((observable, o, n) -> refreshRecords());
+        artistField.textProperty().addListener((observable, o, n) -> refreshRecords());
+    }
+
+    private void refreshRecords() {
+        searchRecords();
+        recordsListView.setItems(FXCollections.observableList(filteredRecords));
+    }
+
+    private void searchRecords() {
+        String searchTitle = searchField.getText();
+        String searchArtist = artistField.getText();
+
+        filteredRecords = records.stream().filter(record -> {
+            return record.getName().contains(searchTitle) &&
+                    record.getArtist().getName().contains(searchArtist);
+        }).collect(Collectors.toList());
     }
 }
