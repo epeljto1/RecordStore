@@ -65,6 +65,16 @@ public class HomeController {
     {
         tabManager.changeWindow("Login","Log in",new LoginController(),actionEvent);
     }
+
+    public void detailsAction(ActionEvent actionEvent) throws RecordStoreException {
+        Record selected = recordsListView.getSelectionModel().getSelectedItem();
+
+        if (selected != null)
+            tabManager.openWindow("RecordDetails", "Record details", new RecordDetailsController(selected), actionEvent);
+        else
+            infoLabel.setText("You need to select a record that you want to view.");
+    }
+
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));
