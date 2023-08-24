@@ -18,7 +18,7 @@ import java.util.List;
 public class AddnUpdateController {
     public Label pageLabel;
     public TextField titleField;
-    public ComboBox<Artist> artistCBox;
+    public TextField artistField;
     public DatePicker rdPicker;
     public TextField genreField;
     public TextField countryField;
@@ -39,24 +39,26 @@ public class AddnUpdateController {
 
     @FXML
     public void initialize() {
-        pageLabel.setText(operation + " a record");
+        pageLabel.setText(operation.toUpperCase() + " A RECORD");
         showRecord(record);
         record = null;
     }
 
+    public Record getRecord() {
+        return record;
+    }
+
     private void showRecord(Record record)
     {
-        artistCBox.setItems(FXCollections.observableList(artists));
 
         if(record == null)
         {
-            artistCBox.getSelectionModel().selectFirst();
             rdPicker.setValue(LocalDate.now());
         }
         else
         {
             titleField.setText(record.getName());
-            artistCBox.getSelectionModel().select(record.getArtist());
+            artistField.setText(record.getArtist().getName());
             rdPicker.setValue(record.getRelease_date().toLocalDate());
             genreField.setText(record.getGenre());
             countryField.setText(record.getCountry());

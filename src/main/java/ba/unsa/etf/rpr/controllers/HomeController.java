@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 import java.util.List;
@@ -73,6 +74,18 @@ public class HomeController {
             tabManager.openWindow("RecordDetails", "Record details", new RecordDetailsController(selected), actionEvent);
         else
             infoLabel.setText("You need to select a record that you want to view.");
+    }
+
+    public void addAction(ActionEvent actionEvent) throws RecordStoreException {
+        AddnUpdateController aouController = new AddnUpdateController("add", artists,null);
+        Stage newStage = tabManager.openWindow("AddnUpdate", "Add", aouController, actionEvent);
+
+        newStage.setOnHiding(event -> {
+            Record newRecord = aouController.getRecord();
+            if(newRecord == null) return;
+            records.add(newRecord);
+            infoLabel.setText("Added a new record successfully.");
+        });
     }
 
     private void refreshRecords() {
