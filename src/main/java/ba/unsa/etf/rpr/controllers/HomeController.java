@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -58,6 +59,7 @@ public class HomeController {
         artistField.textProperty().addListener((observable, o, n) -> refreshRecords());
     }
 
+    public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));

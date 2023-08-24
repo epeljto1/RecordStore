@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import ba.unsa.etf.rpr.exceptions.UserException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ public class SignupController {
     private final UserManager userManager = new UserManager();
     private final TabManager tabManager = new TabManager();
 
+    @FXML
     public void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
 
