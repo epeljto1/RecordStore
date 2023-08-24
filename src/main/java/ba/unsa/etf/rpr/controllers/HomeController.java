@@ -8,11 +8,11 @@ import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 
-import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

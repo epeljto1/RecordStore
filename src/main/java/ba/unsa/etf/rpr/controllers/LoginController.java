@@ -2,13 +2,17 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
+import ba.unsa.etf.rpr.exceptions.UserException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
     public TextField usernameField;
@@ -31,6 +35,21 @@ public class LoginController {
             if(n.trim().isEmpty()) setInvalidStyles(passwordField);
             else removeInvalidStyles(passwordField);
         });
+    }
+
+    public void loginAction(ActionEvent actionEvent) throws RecordStoreException
+    {
+        User user;
+        try
+        {
+            user = userManager.getUser(usernameField.getText(),userManager.hashPassword(passwordField.getText()));
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        tabManager.changeWindow("Home","Home", new HomeController(user.getUsername()),actionEvent);
     }
     public void goToSignupAction(ActionEvent actionEvent) throws RecordStoreException {
         tabManager.changeWindow("Signup", "Sign up", new SignupController(), actionEvent);

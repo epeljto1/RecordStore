@@ -27,12 +27,12 @@
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font></Label>
-                <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#" style="-fx-background-color: #f4c0d7;" text="LOG OUT" textFill="#000000">
+                <Button fx:id="logoutBtn" mnemonicParsing="false" style="-fx-background-color: #f4c0d7;" text="LOG OUT" textFill="#000000">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
                 <Separator id="separator" orientation="VERTICAL" />
-                <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeAction" style="-fx-background-color: #f4c0d7;" text="CLOSE" textFill="#000000">
+                <Button fx:id="closeBtn" mnemonicParsing="false" style="-fx-background-color: #f4c0d7;" text="CLOSE" textFill="#000000">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
@@ -67,7 +67,7 @@
                 </Label>
                 <TextField fx:id="dateField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" />
                 <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                <Button fx:id="detailsBtn" maxWidth="1.7976931348623157E308" minWidth="148.0" mnemonicParsing="false" onAction="#" style="-fx-background-color: #f4c0d7;" text="VIEW DETAILS" textFill="#000000">
+                <Button fx:id="detailsBtn" maxWidth="1.7976931348623157E308" minWidth="148.0" mnemonicParsing="false" style="-fx-background-color: #f4c0d7;" text="VIEW DETAILS" textFill="#000000">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
