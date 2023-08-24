@@ -85,6 +85,28 @@ public class HomeController {
             if(newRecord == null) return;
             records.add(newRecord);
             infoLabel.setText("Added a new record successfully.");
+            refreshRecords();
+        });
+    }
+
+    public void updateAction(ActionEvent actionEvent) throws RecordStoreException
+    {
+        Record selected = recordsListView.getSelectionModel().getSelectedItem();
+        if(selected == null) {
+            infoLabel.setText("You need to select a record that you want to update.");
+            return;
+        }
+
+        AddnUpdateController aouController = new AddnUpdateController("update", artists, selected);
+        Stage newStage = tabManager.openWindow("AddnUpdate", "Update", aouController, actionEvent);
+
+        newStage.setOnHiding(event -> {
+            Record updated = aouController.getRecord();
+            if(updated == null) return;
+            updated.setId(selected.getId());
+            records.set(records.indexOf(selected), updated);
+            refreshRecords();
+            infoLabel.setText("Updated a new record successfully.");
         });
     }
 
