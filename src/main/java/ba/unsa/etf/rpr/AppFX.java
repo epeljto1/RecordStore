@@ -20,7 +20,7 @@ public class AppFX extends Application {
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
         loader.setController(new LoginController());
-        stage.setTitle("RecordStore");
+        stage.setTitle("RecordStore | Log in");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
