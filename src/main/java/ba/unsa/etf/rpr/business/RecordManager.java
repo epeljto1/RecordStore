@@ -31,4 +31,9 @@ public class RecordManager {
     {
         return DaoFactory.recordDao().getAll();
     }
+
+    public List<Record> searchByName(String name) throws RecordStoreException
+    {
+        return DaoFactory.recordDao().searchByName(name);
+    }
 }
