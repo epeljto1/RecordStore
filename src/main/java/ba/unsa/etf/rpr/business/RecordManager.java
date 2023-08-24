@@ -19,4 +19,9 @@ public class RecordManager {
     {
         return DaoFactory.recordDao().update(record);
     }
+
+    public void delete(int id) throws RecordStoreException
+    {
+        DaoFactory.recordDao().delete(id);
+    }
 }
