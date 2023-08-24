@@ -36,4 +36,9 @@ public class RecordManager {
     {
         return DaoFactory.recordDao().searchByName(name);
     }
+
+    public List<Record> searchByArtist(String name) throws RecordStoreException
+    {
+        return DaoFactory.recordDao().searchByArtist(name);
+    }
 }
