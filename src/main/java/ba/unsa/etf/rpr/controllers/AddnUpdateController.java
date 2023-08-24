@@ -6,10 +6,8 @@ import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -68,6 +66,12 @@ public class AddnUpdateController {
             errorMsgLabel.setVisible(true);
             errorMsgLabel.setText(e.getMessage());
         }
+    }
+
+    public void cancelAction(ActionEvent actionEvent)
+    {
+        record = null;
+        tabManager.closeWindow(actionEvent);
     }
 
     private void setRecord(String title, String artist, LocalDate rd, String genre, String country) throws RecordStoreException {
