@@ -60,6 +60,11 @@ public class HomeController {
     }
 
     public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}
+
+    public void logoutAction(ActionEvent actionEvent) throws RecordStoreException
+    {
+        tabManager.changeWindow("Login","Log in",new LoginController(),actionEvent);
+    }
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));
