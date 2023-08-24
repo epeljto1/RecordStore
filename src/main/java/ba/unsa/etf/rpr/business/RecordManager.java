@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
+import java.util.Date;
 import java.util.List;
 
 public class RecordManager {
@@ -40,5 +41,10 @@ public class RecordManager {
     public List<Record> searchByArtist(String name) throws RecordStoreException
     {
         return DaoFactory.recordDao().searchByArtist(name);
+    }
+
+    public List<Record> searchByDateRange(Date start, Date end) throws RecordStoreException
+    {
+        return DaoFactory.recordDao().searchByDateRange(start,end);
     }
 }
