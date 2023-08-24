@@ -9,4 +9,9 @@ public class RecordManager {
     {
         return DaoFactory.recordDao().getById(id);
     }
+
+    public Record add(Record record) throws RecordStoreException
+    {
+        return DaoFactory.recordDao().add(record);
+    }
 }
