@@ -81,4 +81,10 @@ public class ArtistManager {
     {
         return DaoFactory.artistDao().searchByLabel(label);
     }
+
+    public void validateArtist(Artist artist) throws RecordStoreException
+    {
+        if(!artist.getType().equals("Band") || !artist.getType().equals("Singer"))
+            throw new RecordStoreException("Artist type has to be either 'Band' or 'Singer'.");
+    }
 }
