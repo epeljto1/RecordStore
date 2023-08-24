@@ -14,4 +14,9 @@ public class RecordManager {
     {
         return DaoFactory.recordDao().add(record);
     }
+
+    public Record update(Record record) throws RecordStoreException
+    {
+        return DaoFactory.recordDao().update(record);
+    }
 }
