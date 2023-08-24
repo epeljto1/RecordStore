@@ -1,17 +1,20 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.ArtistManager;
 import ba.unsa.etf.rpr.business.RecordManager;
 import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,19 +25,23 @@ public class AddnUpdateController {
     public DatePicker rdPicker;
     public TextField genreField;
     public TextField countryField;
+    public Label errorMsgLabel;
 
     private final TabManager tabManager = new TabManager();
     private final RecordManager recordManager = new RecordManager();
+    private final ArtistManager artistManager = new ArtistManager();
 
     private final String operation;
     private final List<Artist> artists;
     private Record record;
+    private int recordId;
 
     public AddnUpdateController(String operation, List<Artist> artists, Record record) throws RecordStoreException
     {
         this.operation = operation;
         this.artists = artists;
         this.record = record;
+        if(record!=null) recordId=record.getId();
     }
 
     @FXML
@@ -42,6 +49,33 @@ public class AddnUpdateController {
         pageLabel.setText(operation.toUpperCase() + " A RECORD");
         showRecord(record);
         record = null;
+    }
+
+    public void submitAction(ActionEvent actionEvent)  throws RecordStoreException{
+        setRecord(titleField.getText(), artistField.getText(),
+                rdPicker.getValue(), genreField.getText(),countryField.getText());
+
+        try {
+            if (operation.equalsIgnoreCase("add"))
+                recordManager.add(record);
+            else if (operation.equalsIgnoreCase("update")) {
+                record.setId(recordId);
+                recordManager.update(record);
+            }
+
+            tabManager.closeWindow(actionEvent);
+        } catch(RecordStoreException e) {
+            errorMsgLabel.setVisible(true);
+            errorMsgLabel.setText(e.getMessage());
+        }
+    }
+
+    private void setRecord(String title, String artist, LocalDate rd, String genre, String country) throws RecordStoreException {
+        if(record == null) record = new Record.Builder(0,title).build();
+        record.setArtist(artistManager.searchByName(artist).get(0));
+        record.setRelease_date(Date.valueOf(rd));
+        record.setGenre(genre);
+        record.setCountry(country);
     }
 
     public Record getRecord() {
