@@ -110,6 +110,26 @@ public class HomeController {
         });
     }
 
+    public void deleteAction(ActionEvent actionEvent)
+    {
+        Record selected = recordsListView.getSelectionModel().getSelectedItem();
+        if(selected==null)
+        {
+            infoLabel.setText("You need to select a record that you want to delete.");
+            return;
+        }
+        try {
+            recordManager.delete(selected.getId());
+            records.remove(selected);
+            refreshRecords();
+            infoLabel.setText("Record deleted successfully");
+        }
+        catch(RecordStoreException e)
+        {
+            infoLabel.setText(e.getMessage());
+        }
+    }
+
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));
