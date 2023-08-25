@@ -60,12 +60,6 @@
                     </font>
                 </Label>
                 <TextField fx:id="artistField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" />
-                <Label text="SEARCH BY DATE" textFill="#f4c0d7">
-                    <font>
-                        <Font name="System Bold" size="13.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="dateField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" />
                 <Button fx:id="addBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAction" style="-fx-background-color: #f4c0d7; -fx-border-width: 0;" text="ADD" textFill="#000000">
                     <font>
                         <Font name="System Bold" size="12.0" />

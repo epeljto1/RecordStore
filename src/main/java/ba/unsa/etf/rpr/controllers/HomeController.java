@@ -23,7 +23,6 @@ public class HomeController {
     public Label usernameLabel;
     public TextField searchField;
     public TextField artistField;
-    public TextField dateField;
     public ListView<Record> recordsListView;
     public Label infoLabel;
 
