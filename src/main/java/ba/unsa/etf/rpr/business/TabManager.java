@@ -30,6 +30,7 @@ public class TabManager {
         Stage newStage = new Stage();
         try {
             newStage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            newStage.getIcons().add(new Image("/images/recordstore-icon.png"));
             newStage.setTitle("RecordStore | " + title);
             newStage.setResizable(false);
             newStage.show();
