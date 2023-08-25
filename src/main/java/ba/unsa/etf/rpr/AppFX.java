@@ -22,6 +22,7 @@ public class AppFX extends Application {
         loader.setController(new LoginController());
         stage.setTitle("RecordStore | Log in");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.getIcons().add(new Image("/images/recordstore-icon.png"));
         stage.setResizable(false);
         stage.show();
     }
