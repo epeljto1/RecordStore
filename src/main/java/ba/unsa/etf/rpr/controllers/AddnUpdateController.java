@@ -76,10 +76,16 @@ public class AddnUpdateController {
 
     private void setRecord(String title, String artist, LocalDate rd, String genre, String country) throws RecordStoreException {
         if(record == null) record = new Record.Builder(0,title).build();
-        record.setArtist(artistManager.searchByName(artist).get(0));
-        record.setRelease_date(Date.valueOf(rd));
-        record.setGenre(genre);
-        record.setCountry(country);
+        try{
+            record.setArtist(artistManager.searchByName(artist).get(0)); }
+        catch (IndexOutOfBoundsException e)
+        {
+            System.out.println("Can't find this artist in the database");
+        }
+            record.setRelease_date(Date.valueOf(rd));
+            record.setGenre(genre);
+            record.setCountry(country);
+
     }
 
     public Record getRecord() {
