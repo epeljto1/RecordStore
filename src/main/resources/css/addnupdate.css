@@ -1,0 +1,20 @@
+.default {
+    -fx-background-color: white;
+}
+
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-radius: 3px;
+}
+
+.date-picker .arrow-button {
+	-fx-background-color: #f4c0d7;
+	-fx-background-radius: 3px;
+	-fx-border-color: #f4c0d7;
+	-fx-border-radius: 3px;
+}
+
+.date-picker .arrow-button .arrow {
+	-fx-background-color: white;
+}
