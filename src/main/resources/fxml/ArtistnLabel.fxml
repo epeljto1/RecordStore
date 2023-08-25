@@ -33,17 +33,17 @@
                                                         <TextField fx:id="artistCountryField" promptText="Artist country" style="-fx-background-color: white;" />
                                                         <TextField fx:id="artistTypeField" promptText="Artist type" style="-fx-background-color: white;" />
                                                         <Pane VBox.vgrow="ALWAYS" />
-                                                        <Button fx:id="addArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addArtistAction" style="-fx-background-color: #f4c0d7;" styleClass="primary" text="ADD" textFill="#000000">
+                                                        <Button fx:id="addArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f4c0d7;" styleClass="primary" text="ADD" textFill="#000000">
                                                             <font>
                                                                 <Font name="System Bold" size="12.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="updateArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateArtistAction" style="-fx-background-color: #f4c0d7; -fx-border-width: 0;" styleClass="primary" text="UPDATE" textFill="#000000">
+                                                        <Button fx:id="updateArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f4c0d7; -fx-border-width: 0;" styleClass="primary" text="UPDATE" textFill="#000000">
                                                             <font>
                                                                 <Font name="System Bold" size="12.0" />
                                                             </font>
                                                         </Button>
-                                                        <Button fx:id="deleteArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteArtistAction" style="-fx-background-color: #f4c0d7; -fx-border-width: 0;" styleClass="primary" text="DELETE" textFill="#000000">
+                                                        <Button fx:id="deleteArtistBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f4c0d7; -fx-border-width: 0;" styleClass="primary" text="DELETE" textFill="#000000">
                                                             <font>
                                                                 <Font name="System Bold" size="12.0" />
                                                             </font>

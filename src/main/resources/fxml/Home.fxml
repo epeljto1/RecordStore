@@ -87,6 +87,10 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
+                <Button fx:id="artistsnlabelsBtn" minWidth="148.0" mnemonicParsing="false" style="-fx-background-color: #f4c0d7;" text="ARTISTS AND LABELS" textFill="#000000">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
