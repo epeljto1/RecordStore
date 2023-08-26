@@ -30,6 +30,20 @@ public class LabelManagerTest {
         Assertions.assertEquals(labels,labelManager.getAll());
     }
 
+    @Test
+    public void addTest() throws RecordStoreException
+    {
+        Mockito.doAnswer(answer -> {
+            labels.add(answer.getArgument(0));
+            return answer.getArgument(0);
+        }).when(labelManager).add(Mockito.any());
+
+        List<Label> previous = new ArrayList<>(labels);
+        Label added = labelManager.add(newLabel(4,"Label 4","Country 4"));
+        previous.add(added);
+        Assertions.assertEquals(labels,previous);
+    }
+
     private Label newLabel(int id, String name, String country)
     {
         Label label = new Label();
