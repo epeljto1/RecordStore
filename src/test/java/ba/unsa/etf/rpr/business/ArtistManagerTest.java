@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArtistManagerTest {
     private final ArtistManager artistManager = Mockito.mock(ArtistManager.class);
@@ -34,6 +35,12 @@ public class ArtistManagerTest {
     }
 
     @Test
+    public void searchByNameTest() throws RecordStoreException
+    {
+
+    }
+
+    @Test
     public void searchByLabelTest() throws RecordStoreException
     {
         Mockito.doAnswer(answer -> {
@@ -41,11 +48,10 @@ public class ArtistManagerTest {
             return artists
                     .stream()
                     .filter(artist -> artist.getLabel().getName().equals(labelName))
-                    .findFirst()
-                    .orElse(null);
+                    .collect(Collectors.toList());
         }).when(artistManager).searchByLabel(Mockito.anyString());
 
-        Assertions.assertEquals(artists.size(),2);
+        Assertions.assertEquals(2,artistManager.searchByLabel("Label 1").size());
     }
 
     private Artist newArtist(int id, String name, Label label, String country, String type)
