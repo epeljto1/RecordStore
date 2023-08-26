@@ -37,7 +37,16 @@ public class ArtistManagerTest {
     @Test
     public void searchByNameTest() throws RecordStoreException
     {
+        Mockito.doAnswer(answer -> {
+            String artistName = answer.getArgument(0);
+            return artists
+                    .stream()
+                    .filter(artist -> artist.getName().equals(artistName))
+                    .collect(Collectors.toList());
+        }).when(artistManager).searchByName(Mockito.anyString());
 
+        Assertions.assertEquals(1,artistManager.searchByName("Artist 1").size());
+        Assertions.assertEquals(1,artistManager.searchByName("Artist 2").size());
     }
 
     @Test
