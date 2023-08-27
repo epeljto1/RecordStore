@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,37 @@ public class RecordManagerTest {
         }).when(recordManager).searchByArtist(Mockito.anyString());
 
         Assertions.assertEquals(2,recordManager.searchByArtist("Artist 1").size());
+    }
+
+    @Test
+    public void searchByDateRangeTest() throws RecordStoreException
+    {
+        Mockito.doAnswer(answer -> {
+            Date startDate = answer.getArgument(0);
+            Date endDate = answer.getArgument(1);
+            return records.stream()
+                    .filter(record -> record.getRelease_date().compareTo(startDate) >= 0
+                            && record.getRelease_date().compareTo(endDate) <= 0)
+                    .collect(Collectors.toList());
+        }).when(recordManager).searchByDateRange(Mockito.any(Date.class), Mockito.any(Date.class));
+
+        try {
+            Assertions.assertEquals(1, recordManager.searchByDateRange(DateFormat.getDateInstance().parse("1999-01-01"),
+                    DateFormat.getDateInstance().parse("2002-01-01")).size());
+        }
+        catch(java.text.ParseException e)
+        {
+            e.getMessage();
+        }
+
+        try {
+            Assertions.assertEquals(0, recordManager.searchByDateRange(DateFormat.getDateInstance().parse("2005-01-01"),
+                    DateFormat.getDateInstance().parse("2010-01-01")).size());
+        }
+        catch(java.text.ParseException e)
+        {
+            e.getMessage();
+        }
     }
 
     private Record newRecord(int id, String name, Artist artist, Date release_date, String genre, String country)
