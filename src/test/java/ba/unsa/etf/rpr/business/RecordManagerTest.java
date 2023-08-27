@@ -46,9 +46,24 @@ public class RecordManagerTest {
         Assertions.assertEquals(1,recordManager.searchByName("Record 1").size());
     }
 
+    @Test
+    public void searchByArtistTest() throws RecordStoreException
+    {
+        Mockito.doAnswer(answer -> {
+            String artistName = answer.getArgument(0);
+            return records
+                    .stream()
+                    .filter(record -> record.getArtist().getName().equals(artistName))
+                    .collect(Collectors.toList());
+        }).when(recordManager).searchByArtist(Mockito.anyString());
+
+        Assertions.assertEquals(2,recordManager.searchByArtist("Artist 1").size());
+    }
+
     private Record newRecord(int id, String name, Artist artist, Date release_date, String genre, String country)
     {
         Record record = new Record.Builder(id,name).build();
+        record.setArtist(artist);
         record.setRelease_date(release_date);
         record.setGenre(genre);
         record.setCountry(country);
