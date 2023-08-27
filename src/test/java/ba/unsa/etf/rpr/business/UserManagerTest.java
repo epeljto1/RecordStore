@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 import ba.unsa.etf.rpr.exceptions.UserException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,17 @@ public class UserManagerTest {
             userManager.validateSignUp("userpass","userpass");
         });
         Assertions.assertEquals("Password needs to contain at least one uppercase letter and one number.", e.getMessage());
+    }
+
+    @Test
+    public void getUserTest() throws RecordStoreException
+    {
+        User newUser = new User();
+        newUser.setUsername("newuser");
+        newUser.setPassword("newUser1");
+        Mockito.when(userManager.getUser(user.getUsername(), user.getPassword())).thenReturn(newUser);
+        User nuser = userManager.getUser(user.getUsername(), user.getPassword());
+        Assertions.assertEquals(nuser, newUser);
     }
 
     public User newUser(int id, String username, String password)
