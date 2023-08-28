@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RecordStore" target="14" />
+      <module name="RecordStore" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
