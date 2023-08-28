@@ -109,7 +109,7 @@ public class App {
     private static void printHelp() {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
-        helpFormatter.printUsage(printWriter, 100, "java -jar bookstore-cli-jar-with-dependencies.jar [option] [arg]");
+        helpFormatter.printUsage(printWriter, 100, "java -jar RecordStore-cli-jar-with-dependencies.jar [option] [arg]");
         helpFormatter.printOptions(printWriter, 100, addOptions(), 2, 5);
         printWriter.close();
     }
