@@ -139,8 +139,8 @@ public class HomeController {
         String searchArtist = artistField.getText();
 
         filteredRecords = records.stream().filter(record -> {
-            return record.getName().contains(searchTitle) &&
-                    record.getArtist().getName().contains(searchArtist);
+            return record.getName().toLowerCase().contains(searchTitle.toLowerCase()) &&
+                    record.getArtist().getName().toLowerCase().contains(searchArtist.toLowerCase());
         }).collect(Collectors.toList());
     }
 }

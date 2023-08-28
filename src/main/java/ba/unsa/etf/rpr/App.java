@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.business.ArtistManager;
+import ba.unsa.etf.rpr.business.LabelManager;
+import ba.unsa.etf.rpr.business.RecordManager;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Artist;
 import ba.unsa.etf.rpr.domain.Label;
@@ -31,7 +34,18 @@ public class App {
     private static final Option addLabel = new Option("al","add-label",false,"Adds a new label");
     private static final Option updateLabel = new Option("ul","update-label",true,"Updates a label");
     private static final Option deleteLabel = new Option("dl","delete-label",true,"Deletes a label");
+
+    private static final RecordManager recordManager = new RecordManager();
+    private static final ArtistManager artistManager = new ArtistManager();
+    private static final LabelManager labelManager = new LabelManager();
     public static void main(String[] args) throws RecordStoreException {
 
+    }
+
+    private static Options addOptions() {
+        return new Options().addOption(getRecord).addOption(getRecords).addOption(addRecord).addOption(updateRecord)
+                .addOption(deleteRecord).addOption(getArtist).addOption(getArtists).addOption(addArtist)
+                .addOption(updateArtist).addOption(deleteArtist).addOption(getLabel).addOption(getLabels)
+                .addOption(addLabel).addOption(updateLabel).addOption(deleteLabel);
     }
 }
