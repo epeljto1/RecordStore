@@ -129,6 +129,11 @@ public class HomeController {
         }
     }
 
+    public void artistsAction(ActionEvent actionEvent) throws RecordStoreException
+    {
+        tabManager.openWindow("Artists","Artists",new ArtistController(),actionEvent);
+    }
+
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));
