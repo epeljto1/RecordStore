@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class used for testing ArtistManager class
+ * @author Emina Peljto
+ */
+
 public class ArtistManagerTest {
     private final ArtistManager artistManager = Mockito.mock(ArtistManager.class);
     private final List<Artist> artists = new ArrayList<>();

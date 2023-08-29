@@ -17,6 +17,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class used for testing RecordManager class
+ * @author Emina Peljto
+ */
 public class RecordManagerTest {
     private final RecordManager recordManager = Mockito.mock(RecordManager.class);
     private final List<Record> records = new ArrayList<>();

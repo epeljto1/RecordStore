@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class used for testing LabelManager class
+ * @author Emina Peljto
+ */
+
 public class LabelManagerTest {
     private final LabelManager labelManager = Mockito.mock(LabelManager.class);
     private final List<Label> labels = new ArrayList<>();
