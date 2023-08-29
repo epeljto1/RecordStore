@@ -2,7 +2,7 @@
 --
 -- Host: sql.freedb.tech    Database: freedb_RPRbaza
 -- ------------------------------------------------------
--- Server version	8.0.33-0ubuntu0.22.04.2
+-- Server version	8.0.34-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,7 +40,7 @@ CREATE TABLE `artists` (
 
 LOCK TABLES `artists` WRITE;
 /*!40000 ALTER TABLE `artists` DISABLE KEYS */;
-INSERT INTO `artists` VALUES (1,'Depeche Mode',1,'United Kingdom','Band'),(2,'Beyoncé',2,'United States','Singer'),(4,'Yazoo',2,'United Kingdom','Band');
+INSERT INTO `artists` VALUES (1,'Depeche Mode',1,'United Kingdom','Band'),(2,'Beyoncé',2,'United States','Singer');
 /*!40000 ALTER TABLE `artists` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `records` (
   PRIMARY KEY (`id`),
   KEY `fk_record_artist_idx` (`artist_id`),
   CONSTRAINT `fk_record_artist` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,8 +95,33 @@ CREATE TABLE `records` (
 
 LOCK TABLES `records` WRITE;
 /*!40000 ALTER TABLE `records` DISABLE KEYS */;
-INSERT INTO `records` VALUES (1,'RENAISSANCE',2,'2022-07-29','Pop','United States'),(2,'Violator',1,'1990-03-19','Electronic','United Kingdom');
+INSERT INTO `records` VALUES (2,'Violator',1,'1990-03-19','Electronic','United Kingdom'),(8,'RENAISSANCE',2,'2022-07-29','Pop','United States'),(11,'Music for the Masses',1,'1987-09-28','Electronic','United Kingdom'),(12,'Lemonade',2,'2016-04-23','Pop','United States');
 /*!40000 ALTER TABLE `records` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'epeljto1','ef6acb3c35fa7338ccdd6b960760aaf3f1539484');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -108,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-16 17:13:28
+-- Dump completed on 2023-08-29 13:24:40
