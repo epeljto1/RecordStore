@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * Bean class for artists
+ * @author Emina Peljto
  */
 
 public class Artist implements Identifiable {

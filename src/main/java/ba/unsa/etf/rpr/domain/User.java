@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr.domain;
 
+/**
+ * Bean class for users
+ * @author Emina Peljto
+ */
 public class User implements Identifiable {
     private int id;
     private String username;

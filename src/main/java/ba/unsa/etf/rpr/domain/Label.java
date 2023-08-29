@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * Bean class for labels
+ * @author Emina Peljto
  */
 
 public class Label implements Identifiable {

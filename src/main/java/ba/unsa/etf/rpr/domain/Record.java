@@ -7,6 +7,7 @@ import java.util.Objects;
 
 /**
  * Bean class for records
+ * @author Emina Peljto
  */
 
 public class Record implements Identifiable {
