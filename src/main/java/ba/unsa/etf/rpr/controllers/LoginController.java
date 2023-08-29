@@ -44,6 +44,12 @@ public class LoginController {
         {
             user = userManager.getUser(usernameField.getText(),userManager.hashPassword(passwordField.getText()));
         }
+        catch(RecordStoreException e)
+        {
+            errorMsgLabel.setText("The username or password is incorrect.");
+            errorMsgLabel.setVisible(true);
+            return;
+        }
         catch(NoSuchAlgorithmException e)
         {
             throw new RuntimeException(e);

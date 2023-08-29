@@ -64,7 +64,7 @@ public class AddnUpdateController {
             tabManager.closeWindow(actionEvent);
         } catch(RecordStoreException e) {
             errorMsgLabel.setVisible(true);
-            errorMsgLabel.setText(e.getMessage());
+            errorMsgLabel.setText("Something went wrong. Try again.");
         }
     }
 

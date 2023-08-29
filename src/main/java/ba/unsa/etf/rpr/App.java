@@ -202,6 +202,7 @@ public class App {
             record.setArtist(artistManager.getById(in.nextInt()));
             System.out.println("Record release date (yyyy-mm-dd): ");
             record.setRelease_date(Date.valueOf(LocalDate.parse(in.next())));
+            in.nextLine();
             System.out.println("Record genre: ");
             record.setGenre(in.nextLine());
             System.out.println("Record country: ");
