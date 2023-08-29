@@ -12,7 +12,7 @@ import java.util.*;
 
 public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     private Connection conn;
-
+    private static RecordDaoSQLImpl instance;
     public RecordDaoSQLImpl() {
       super("records");
     }
@@ -48,6 +48,17 @@ public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
         row.put("genre", object.getGenre());
         row.put("country", object.getCountry());
         return row;
+    }
+
+    public static RecordDaoSQLImpl getInstance()
+    {
+        if(instance == null) instance = new RecordDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance()
+    {
+        if(instance != null) instance=null;
     }
 
     @Override

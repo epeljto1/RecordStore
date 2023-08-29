@@ -10,6 +10,7 @@ import java.util.*;
 
 public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     private Connection conn;
+    private static ArtistDaoSQLImpl instance;
 
     public ArtistDaoSQLImpl() {
     super("artists");
@@ -44,6 +45,17 @@ public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
         row.put("country", object.getCountry());
         row.put("type", object.getType());
         return row;
+    }
+
+    public static ArtistDaoSQLImpl getInstance()
+    {
+        if(instance == null) instance = new ArtistDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance()
+    {
+        if(instance != null) instance = null;
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.*;
 
 public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     private Connection conn;
+    private static LabelDaoSQLImpl instance = null;
 
     public LabelDaoSQLImpl() {
      super("labels");
@@ -38,6 +39,17 @@ public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
         row.put("name", object.getName());
         row.put("country", object.getCountry());
         return row;
+    }
+
+    public static LabelDaoSQLImpl getInstance()
+    {
+        if(instance == null) instance = new LabelDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance()
+    {
+        if(instance!=null) instance = null;
     }
 
     @Override

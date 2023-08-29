@@ -1,11 +1,11 @@
 package ba.unsa.etf.rpr.dao;
 
 public class DaoFactory {
-    private static final LabelDao labelDao = new LabelDaoSQLImpl();
-    private static final ArtistDao artistDao = new ArtistDaoSQLImpl();
-    private static final RecordDao recordDao = new RecordDaoSQLImpl();
+    private static final LabelDao labelDao = LabelDaoSQLImpl.getInstance();
+    private static final ArtistDao artistDao = ArtistDaoSQLImpl.getInstance();
+    private static final RecordDao recordDao = RecordDaoSQLImpl.getInstance();
 
-    private static final UserDao userDao = new UserDaoSQLImpl();
+    private static final UserDao userDao = UserDaoSQLImpl.getInstance();
 
     private DaoFactory(){}
 
