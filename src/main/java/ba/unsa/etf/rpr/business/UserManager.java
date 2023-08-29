@@ -13,7 +13,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 /**
- * Business logic layer for User
+ * Business logic layer for users
  * @author Emina Peljto
  */
 

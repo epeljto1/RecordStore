@@ -12,18 +12,44 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Manages opening, changing and closing of the app tabs and windows
+ * @author Emina Peljto
+ */
+
 public class TabManager {
+    /**
+     * Closes the current window
+     * @param actionEvent
+     */
     public void closeWindow(ActionEvent actionEvent) {
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Displays a new window
+     * @param fxmlFileName
+     * @param title
+     * @param controller
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void changeWindow(String fxmlFileName, String title, Object controller, ActionEvent actionEvent) throws RecordStoreException {
         openWindow(fxmlFileName, title, controller, actionEvent);
         closeWindow(actionEvent);
     }
 
+    /**
+     * Opens a new window
+     * @param fxmlFileName
+     * @param title
+     * @param controller
+     * @param actionEvent
+     * @return
+     * @throws RecordStoreException
+     */
     public Stage openWindow(String fxmlFileName, String title, Object controller, ActionEvent actionEvent) throws RecordStoreException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFileName + ".fxml"));
         loader.setController(controller);

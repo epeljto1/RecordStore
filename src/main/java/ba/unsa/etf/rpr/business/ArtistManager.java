@@ -6,6 +6,11 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.util.List;
 
+/**
+ * Business logic layer for artists
+ * @author Emina Peljto
+ */
+
 public class ArtistManager {
     /**
      * Returns artist from DB based on ID
@@ -82,6 +87,11 @@ public class ArtistManager {
         return DaoFactory.artistDao().searchByLabel(label);
     }
 
+    /**
+     * Checks if the artist satisfies certain constraints
+     * @param artist
+     * @throws RecordStoreException
+     */
     public void validateArtist(Artist artist) throws RecordStoreException
     {
         if(!artist.getType().equals("Band") && !artist.getType().equals("Singer"))

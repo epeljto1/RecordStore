@@ -6,6 +6,11 @@ import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
 import java.util.List;
 
+/**
+ * Business logic layer for labels
+ * @author Emina Peljto
+ */
+
 public class LabelManager {
     /**
      * Returns label from DB based on ID
