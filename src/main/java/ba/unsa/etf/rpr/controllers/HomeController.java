@@ -16,8 +16,12 @@ import javafx.stage.Stage;
 
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
+
+/**
+ * Controller for home page
+ * @author Emina Peljto
+ */
 
 public class HomeController {
     public Label usernameLabel;
@@ -33,6 +37,10 @@ public class HomeController {
     private List<Record> filteredRecords;
     private final List<Artist> artists;
 
+    /**
+     * Constructor
+     * @param username
+     */
     public HomeController(String username)
     {
         try
@@ -59,13 +67,27 @@ public class HomeController {
         artistField.textProperty().addListener((observable, o, n) -> refreshRecords());
     }
 
+    /**
+     * Event handler for close
+     * @param actionEvent
+     */
     public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}
 
+    /**
+     * Event handler for log out
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void logoutAction(ActionEvent actionEvent) throws RecordStoreException
     {
         tabManager.changeWindow("Login","Log in",new LoginController(),actionEvent);
     }
 
+    /**
+     * Event handler for details
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void detailsAction(ActionEvent actionEvent) throws RecordStoreException {
         Record selected = recordsListView.getSelectionModel().getSelectedItem();
 
@@ -75,6 +97,11 @@ public class HomeController {
             infoLabel.setText("You need to select a record that you want to view.");
     }
 
+    /**
+     * Event handler for add
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void addAction(ActionEvent actionEvent) throws RecordStoreException {
         AddnUpdateController aouController = new AddnUpdateController("add", artists,null);
         Stage newStage = tabManager.openWindow("AddnUpdate", "Add", aouController, actionEvent);
@@ -88,6 +115,11 @@ public class HomeController {
         });
     }
 
+    /**
+     * Event handler for update
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void updateAction(ActionEvent actionEvent) throws RecordStoreException
     {
         Record selected = recordsListView.getSelectionModel().getSelectedItem();
@@ -109,6 +141,10 @@ public class HomeController {
         });
     }
 
+    /**
+     * Event handler for delete
+     * @param actionEvent
+     */
     public void deleteAction(ActionEvent actionEvent)
     {
         Record selected = recordsListView.getSelectionModel().getSelectedItem();
@@ -129,16 +165,27 @@ public class HomeController {
         }
     }
 
+    /**
+     * Event handler for artists
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void artistsAction(ActionEvent actionEvent) throws RecordStoreException
     {
         tabManager.openWindow("Artists","Artists",new ArtistController(),actionEvent);
     }
 
+    /**
+     * Updates ListView
+     */
     private void refreshRecords() {
         searchRecords();
         recordsListView.setItems(FXCollections.observableList(filteredRecords));
     }
 
+    /**
+     * Filters records by title or artist
+     */
     private void searchRecords() {
         String searchTitle = searchField.getText();
         String searchArtist = artistField.getText();

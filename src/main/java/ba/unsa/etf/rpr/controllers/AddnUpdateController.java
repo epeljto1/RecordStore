@@ -16,6 +16,11 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Controller for add/update a music record
+ * @author Emina Peljto
+ */
+
 public class AddnUpdateController {
     public Label pageLabel;
     public TextField titleField;
@@ -34,6 +39,13 @@ public class AddnUpdateController {
     private Record record;
     private int recordId;
 
+    /**
+     * Constructor
+     * @param operation
+     * @param artists
+     * @param record
+     * @throws RecordStoreException
+     */
     public AddnUpdateController(String operation, List<Artist> artists, Record record) throws RecordStoreException
     {
         this.operation = operation;
@@ -49,6 +61,11 @@ public class AddnUpdateController {
         record = null;
     }
 
+    /**
+     * Event handler for submit
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void submitAction(ActionEvent actionEvent)  throws RecordStoreException{
         setRecord(titleField.getText(), artistField.getText(),
                 rdPicker.getValue(), genreField.getText(),countryField.getText());
@@ -68,12 +85,25 @@ public class AddnUpdateController {
         }
     }
 
+    /**
+     * Event handler for cancel
+     * @param actionEvent
+     */
     public void cancelAction(ActionEvent actionEvent)
     {
         record = null;
         tabManager.closeWindow(actionEvent);
     }
 
+    /**
+     * Setter for private record attribute
+     * @param title
+     * @param artist
+     * @param rd
+     * @param genre
+     * @param country
+     * @throws RecordStoreException
+     */
     private void setRecord(String title, String artist, LocalDate rd, String genre, String country) throws RecordStoreException {
         if(record == null) record = new Record.Builder(0,title).build();
         try{
@@ -88,10 +118,18 @@ public class AddnUpdateController {
 
     }
 
+    /**
+     * Getter for private record attribute
+     * @return record
+     */
     public Record getRecord() {
         return record;
     }
 
+    /**
+     * Displays selected record details or sets default values
+     * @param record
+     */
     private void showRecord(Record record)
     {
 

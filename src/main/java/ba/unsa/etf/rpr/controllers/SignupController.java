@@ -14,6 +14,11 @@ import javafx.scene.control.TextField;
 
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Controller for sign up page
+ * @author Emina Peljto
+ */
+
 public class SignupController {
     public TextField usernameField;
     public PasswordField passwordField;
@@ -43,6 +48,11 @@ public class SignupController {
         });
     }
 
+    /**
+     * Event handler for sign up action
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void signupAction(ActionEvent actionEvent) throws RecordStoreException {
         User user = new User();
         try {
@@ -60,19 +70,36 @@ public class SignupController {
         }
     }
 
+    /**
+     * Event handler for close action
+     * @param actionEvent
+     */
     public void closeAction(ActionEvent actionEvent) {
         tabManager.closeWindow(actionEvent);
     }
 
+    /**
+     * Event handler for log in action
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void goToLoginAction(ActionEvent actionEvent) throws RecordStoreException {
         tabManager.changeWindow("Login", "Log in", new LoginController(), actionEvent);
     }
 
+    /**
+     * Applies invalid styles to text field
+     * @param textField
+     */
     private void setInvalidStyles(TextField textField) {
         textField.getStyleClass().removeAll("default");
         textField.getStyleClass().add("invalid");
     }
 
+    /**
+     * Removes invalid styles from text field
+     * @param textField
+     */
     private void removeInvalidStyles(TextField textField) {
         textField.getStyleClass().removeAll("invalid");
         textField.getStyleClass().add("default");

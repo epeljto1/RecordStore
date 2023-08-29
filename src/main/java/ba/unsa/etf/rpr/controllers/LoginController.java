@@ -4,7 +4,6 @@ import ba.unsa.etf.rpr.business.TabManager;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
-import ba.unsa.etf.rpr.exceptions.UserException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +12,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.security.NoSuchAlgorithmException;
+
+/**
+ * Controller for log in page
+ * @author Emina Peljto
+ */
 
 public class LoginController {
     public TextField usernameField;
@@ -37,6 +41,11 @@ public class LoginController {
         });
     }
 
+    /**
+     * Event handler for log in action
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void loginAction(ActionEvent actionEvent) throws RecordStoreException
     {
         User user;
@@ -57,18 +66,37 @@ public class LoginController {
 
         tabManager.changeWindow("Home","Home", new HomeController(user.getUsername()),actionEvent);
     }
+
+    /**
+     * Event handler for sign up action
+     * @param actionEvent
+     * @throws RecordStoreException
+     */
     public void goToSignupAction(ActionEvent actionEvent) throws RecordStoreException {
         tabManager.changeWindow("Signup", "Sign up", new SignupController(), actionEvent);
     }
+
+    /**
+     * Event handler for close action
+     * @param actionEvent
+     */
     public void closeAction(ActionEvent actionEvent) {
         tabManager.closeWindow(actionEvent);
     }
 
+    /**
+     * Applies invalid styles to text field
+     * @param textField
+     */
     private void setInvalidStyles(TextField textField) {
         textField.getStyleClass().removeAll("default");
         textField.getStyleClass().add("invalid");
     }
 
+    /**
+     * Removes invalid styles from text field
+     * @param textField
+     */
     private void removeInvalidStyles(TextField textField) {
         textField.getStyleClass().removeAll("invalid");
         textField.getStyleClass().add("default");

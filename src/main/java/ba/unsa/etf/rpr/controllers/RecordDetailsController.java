@@ -6,6 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+/**
+ * Controller for record details
+ * @author Emina Peljto
+ */
+
 public class RecordDetailsController {
     public Label titleLabel;
     public Label artistLabel;
@@ -19,6 +24,10 @@ public class RecordDetailsController {
 
     private final TabManager tabManager = new TabManager();
 
+    /**
+     * Constructor
+     * @param record
+     */
     public RecordDetailsController(Record record){this.record = record;}
 
     @FXML
@@ -26,8 +35,15 @@ public class RecordDetailsController {
         getDetails();
     }
 
+    /**
+     * Event handler for close action
+     * @param actionEvent
+     */
     public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}
 
+    /**
+     * Getter for record details
+     */
     private void getDetails()
     {
         titleLabel.setText("TITLE "+record.getName());

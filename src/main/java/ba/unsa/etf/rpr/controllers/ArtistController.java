@@ -9,8 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Controller for artists page
+ * @author Emina Peljto
+ */
 
 public class ArtistController {
     public ListView<Artist> artistsListView;
@@ -19,6 +23,9 @@ public class ArtistController {
 
     private List<Artist> artists;
 
+    /**
+     * Constructor
+     */
     public ArtistController()
     {
         try
@@ -38,5 +45,9 @@ public class ArtistController {
         artistsListView.setItems(FXCollections.observableList(artists));
     }
 
+    /**
+     * Event handler for close
+     * @param actionEvent
+     */
     public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}
 }
