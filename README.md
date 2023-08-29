@@ -17,3 +17,6 @@ _mvn clean install -P cli-app_
 
 _java -jar target\RecordStore-cli-jar-with-dependencies.jar_
 
+**JAVADOC**
+
+_mvn clean javadoc:aggregate_
