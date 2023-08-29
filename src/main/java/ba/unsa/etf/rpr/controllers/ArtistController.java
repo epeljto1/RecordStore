@@ -13,21 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistController {
-    public ListView<String> artistsListView;
+    public ListView<Artist> artistsListView;
     private final ArtistManager artistManager = new ArtistManager();
     private final TabManager tabManager = new TabManager();
 
     private List<Artist> artists;
-    private List<String> artistNames;
 
     public ArtistController()
     {
         try
         {
             artists = FXCollections.observableList(artistManager.getAll());
-            artistNames = FXCollections.observableArrayList();
-            for(Artist artist:artists)
-                artistNames.add(artist.getName());
         }
         catch(RecordStoreException e)
         {
@@ -39,7 +35,7 @@ public class ArtistController {
     @FXML
     public void initialize()
     {
-        artistsListView.setItems(FXCollections.observableList(artistNames));
+        artistsListView.setItems(FXCollections.observableList(artists));
     }
 
     public void closeAction(ActionEvent actionEvent) {tabManager.closeWindow(actionEvent);}

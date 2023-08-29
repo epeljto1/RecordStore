@@ -118,6 +118,12 @@ public class Record implements Identifiable {
     }
 
     @Override
+    public String toString()
+    {
+        return getName();
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, name, artist, release_date, genre, country);
     }
