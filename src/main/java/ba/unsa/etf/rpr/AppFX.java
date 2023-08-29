@@ -12,6 +12,8 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Main class for working with JavaFX framework
+ * GUI
+ * @author Emina Peljto
  */
 
 public class AppFX extends Application {
