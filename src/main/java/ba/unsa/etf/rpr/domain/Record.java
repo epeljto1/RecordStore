@@ -124,6 +124,16 @@ public class Record implements Identifiable {
     }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Record record = (Record) o;
+        return id==record.id && Objects.equals(record.name,name) && Objects.equals(record.artist,artist)
+                && Objects.equals(record.release_date,release_date) && Objects.equals(genre,record.genre) && Objects.equals(country,record.country);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, name, artist, release_date, genre, country);
     }

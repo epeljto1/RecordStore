@@ -38,6 +38,21 @@ public class Label implements Identifiable {
     }
 
     @Override
+    public String toString()
+    {
+        return getName();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if(o == null || getClass()!=o.getClass()) return false;
+        Label label = (Label) o;
+        return id == label.id && Objects.equals(name,label.name) && Objects.equals(country,label.country);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, name, country);
     }

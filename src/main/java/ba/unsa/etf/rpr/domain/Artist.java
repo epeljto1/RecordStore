@@ -66,6 +66,16 @@ public class Artist implements Identifiable {
     }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass()!=o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return id==artist.id && Objects.equals(artist.name,name) && Objects.equals(artist.label,label) && Objects.equals(artist.country,country)
+                && Objects.equals(artist.type,type);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id, name, label, country, type);
     }
