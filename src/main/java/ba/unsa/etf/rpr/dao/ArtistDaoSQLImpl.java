@@ -8,6 +8,10 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Class that implements methods from ArtistDao interface
+ * @author Emina Peljto
+ */
 public class ArtistDaoSQLImpl extends AbstractDao<Artist> implements ArtistDao {
     private Connection conn;
     private static ArtistDaoSQLImpl instance;

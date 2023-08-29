@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Root interface for all DAO classes
- * @author epeljto1
+ * @author Emina Peljto
  */
 public interface Dao<T> {
     T getById(int id) throws RecordStoreException; // get entity from DB by ID

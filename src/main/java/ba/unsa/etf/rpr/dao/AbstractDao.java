@@ -9,6 +9,7 @@ import java.util.*;
 
 /**
  * Abstract class for DAO CRUD methods
+ * @author Emina Peljto
  */
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {

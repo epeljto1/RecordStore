@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * DAO interface for Record model
+ * @author Emina Peljto
  */
 
 public interface RecordDao extends Dao<Record> {

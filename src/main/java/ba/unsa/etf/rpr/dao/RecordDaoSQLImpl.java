@@ -1,15 +1,17 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Artist;
-import ba.unsa.etf.rpr.domain.Label;
 import ba.unsa.etf.rpr.domain.Record;
 import ba.unsa.etf.rpr.exceptions.RecordStoreException;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+/**
+ * Class that implements method from RecordDao interface
+ * @author Emina Peljto
+ */
 public class RecordDaoSQLImpl extends AbstractDao<Record> implements RecordDao {
     private Connection conn;
     private static RecordDaoSQLImpl instance;

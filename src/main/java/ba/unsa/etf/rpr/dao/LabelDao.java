@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * DAO interface for Label model
+ * @author Emina Peljto
  */
 
 public interface LabelDao extends Dao<Label> {

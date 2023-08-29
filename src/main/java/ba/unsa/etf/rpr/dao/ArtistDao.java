@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * DAO interface for Artist model
+ * @author Emina Peljto
  */
 
 public interface ArtistDao extends Dao<Artist> {

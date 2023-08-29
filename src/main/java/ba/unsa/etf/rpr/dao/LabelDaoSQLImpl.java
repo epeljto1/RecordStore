@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Class that implements method from LabelDao interface
+ * @author Emina Peljto
+ */
 public class LabelDaoSQLImpl extends AbstractDao<Label> implements LabelDao {
     private Connection conn;
     private static LabelDaoSQLImpl instance = null;
